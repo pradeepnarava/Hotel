@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Hotel</string>
+    <string name="catsaved">Successfully saved</string>
+   <string name="next">Items</string>
+<string name="previous">Categories</string>
+<string name="list">Menu</string>
+</resources>

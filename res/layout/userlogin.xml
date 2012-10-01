@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+          android:id="@+id/ulogin">"
+
+    <TextView
+       android:layout_marginTop="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Login"
+        android:textSize="25dp" 
+        android:layout_gravity="center"/>
+    
+    
+    <LinearLayout  android:layout_marginTop="30dp"
+        android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" 
+     >
+        
+
+        <TextView
+            android:layout_width="102dp"
+            android:layout_height="wrap_content"
+            android:text="Username"
+            android:textSize="15dp" />
+
+      <EditText
+          android:inputType="textNoSuggestions" 
+          android:singleLine="true"
+          android:id="@+id/user_name"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content" >
+</EditText>"
+    </LinearLayout>
+   <LinearLayout  android:layout_marginTop="30dp"
+        android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" 
+    >
+        
+
+        <TextView
+            android:layout_width="102dp"
+            android:layout_height="wrap_content"
+            android:text="Password"
+            android:textSize="15dp" />
+
+      <EditText
+          android:singleLine="true"
+          android:id="@+id/pass"
+         android:inputType="textPassword|textNoSuggestions" 
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content" >
+</EditText>
+    </LinearLayout>
+    <RelativeLayout android:layout_marginTop="50dp"
+        android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+       <Button
+           android:id="@+id/login"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_alignParentRight="true"
+           android:layout_alignParentTop="true"
+           android:layout_marginRight="66dp"
+           android:text="Login" />
+
+       <Button
+           android:id="@+id/cancel"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_alignParentTop="true"
+           android:layout_marginRight="64dp"
+           android:layout_toLeftOf="@+id/login"
+           android:text="Cancel" />
+        
+    </RelativeLayout>
+</LinearLayout>

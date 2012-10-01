@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" 
+    android:id="@+id/userorderlist">
+    <LinearLayout
+	android:layout_width="fill_parent"
+	android:layout_height="20dp"
+     android:orientation="horizontal"
+    >
+    <TextView 
+ 	android:id="@+id/qun" 
+ 	android:layout_width="wrap_content"
+ 	android:text="QNT"
+ 	android:gravity="center"
+ 	android:textColor="#000000"
+ 	android:layout_height="wrap_content" 
+  	android:textStyle="bold"
+  	android:layout_weight="0.20"/> 
+<TextView 
+ 	android:id="@+id/name" 
+ 	android:layout_width="wrap_content"
+ 	android:text="NAME"
+ 	android:gravity="center"
+ 	android:textColor="#000000"
+ 	android:layout_height="wrap_content" 
+  	android:textStyle="bold"
+  	android:layout_weight="0.40"/> 
+<TextView 
+ 	android:id="@+id/price" 
+ 	android:layout_width="wrap_content"
+ 	android:textColor="#000000"
+ 	android:text="PRICE" 
+   android:gravity="center"
+ 	android:layout_height="wrap_content" 
+ 	android:textStyle="bold"
+ 	android:layout_weight="0.40"/> 
+ 	
+ 
+</LinearLayout>
+
+<View 
+	android:layout_width="fill_parent"
+	android:layout_height="4dp"
+	android:background="#000000"/>
+	
+
+    
+<ListView 
+	android:id="@+id/list"
+    android:layout_width="fill_parent" 
+    android:layout_height="200dip"
+    android:layout_weight="1"
+    android:stackFromBottom="false"
+    android:transcriptMode="normal"/>
+
+<LinearLayout
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_weight="0.02"
+    android:orientation="horizontal" >
+      
+       <TextView
+      android:id="@+id/tt"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="Tax" 
+       android:gravity="center"
+      android:layout_weight="0.50"/>
+      
+    <TextView 
+ 	android:id="@+id/totaltax"
+ 	android:layout_width="wrap_content"
+ 	android:textColor="#000000"
+ 	
+  android:layout_weight="0.50"
+  android:gravity="center"
+ 	android:layout_height="wrap_content" 
+ 	android:textStyle="bold"
+ 	/>   
+</LinearLayout>
+<LinearLayout 
+      
+    android:layout_width="fill_parent"
+	android:layout_height="wrap_content"
+     android:orientation="horizontal" > 
+      
+       <TextView
+           android:id="@+id/total"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_weight="0.22"
+           android:gravity="center"
+           android:text="TotalPrice"
+           android:textSize="20dp" />
+      
+    <TextView 
+ 	android:id="@+id/totalprice"
+ 	android:layout_width="wrap_content"
+ 	android:textColor="#000000"
+ 	
+  android:layout_weight="0.50"
+  android:gravity="center"
+ 	android:layout_height="wrap_content" 
+ 	android:textStyle="bold"
+ 	/>   
+</LinearLayout>
+</LinearLayout>
