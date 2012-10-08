@@ -53,7 +53,7 @@ public class Menu extends Activity{
 				Intent add_user = new Intent(Menu.this,
 					AddUser.class);
 				startActivity(add_user);
-				finish();
+				
 
 			}
 		});
@@ -77,7 +77,7 @@ public class Menu extends Activity{
 				Intent addlogo = new Intent(Menu.this,
 						AddLogo.class);
 				startActivity(addlogo);
-				finish();
+			
 			}
 		});
 		Button tax = (Button) findViewById(R.id.add_tax);
@@ -88,7 +88,7 @@ public class Menu extends Activity{
 				Intent addtax = new Intent(Menu.this,
 						AddTax.class);
 				startActivity(addtax);
-				finish();
+				
 			}
 		});
 		Button contact = (Button) findViewById(R.id.add_contacts);
@@ -115,12 +115,12 @@ public class Menu extends Activity{
 		});
 		
 	}
-	public void onBackPressed() {
+	/*public void onBackPressed() {
     	Log.d("back","back");
            // Do as you please
-    	 /*Intent in=new Intent(getApplicationContext(),.class);    
-	     startActivity(in);*/
-    }
+    	 Intent in=new Intent(getApplicationContext(),.class);    
+	     startActivity(in);
+    }*/
 }
 
 

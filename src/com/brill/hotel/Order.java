@@ -32,6 +32,7 @@ public class Order extends Activity{
 	Button order,cal;
 	 String pathName;
 	String Name,Price;
+	 String category;
 	DataMenuImage data;
 	ImageView img;
 	public static String position;
@@ -40,6 +41,7 @@ public class Order extends Activity{
 	private Dialog dialog;
 	 public static List<String>orderList= new ArrayList<String>();
 	 public static List<String>qunList= new ArrayList<String>();
+	 public static List<String>CatList= new ArrayList<String>();
 	 public static List<Integer>total= new ArrayList<Integer>();
 	// ArrayList<Object> myArr = new ArrayList<Object>();
 	protected void onCreate(Bundle savedInstanceState) {
@@ -84,7 +86,8 @@ public class Order extends Activity{
 		  Log.d("des",""+stri);
 		  des.setText(stri);
 		  Log.d("des",""+des);
-		  
+		 category=UsermenuItems.CategoryList.get(p);
+		  Log.d("category",""+category);
 		  String row=UsermenuItems.RowList.get(p);
 		  Log.d("row",""+row);
 		  int r=Integer.parseInt(row);
@@ -152,6 +155,7 @@ public class Order extends Activity{
 		              int p=Integer.parseInt(Price);
 		              orderList.add(Name+":"+Price);
 		              Log.d("orderList",""+orderList);
+		              CatList.add(category);
 		              total.add(p);
 		              Log.d("total",""+total);
 		              qunList.add(position);
@@ -188,7 +192,8 @@ public class Order extends Activity{
 					    tal = tal + i;
 					    Log.d("",""+tal);
 					    Intent in=new Intent(getApplicationContext(),OrderList.class);    
-					     startActivity(in);  
+					     startActivity(in);
+					     finish();
 					    //Toast.makeText(getApplicationContext(),tal, Toast.LENGTH_SHORT).show();
 					}
 				}
@@ -227,11 +232,11 @@ public class Order extends Activity{
 	    		return super.onOptionsItemSelected(item);
 	    	}
 	    }
-	    @Override
+	   /* @Override
 	    public void onBackPressed() {
 	    	Log.d("back","back");
 	           // Do as you please
 	    	 Intent in=new Intent(getApplicationContext(),UsermenuItems.class);    
 		     startActivity(in); 
-	    }
+	    }*/
 }

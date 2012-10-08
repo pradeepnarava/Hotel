@@ -43,6 +43,7 @@ public class UsermenuItems extends Activity  {
 	 public static List<String>menuList= new ArrayList<String>();
 	 public static List<String>desList= new ArrayList<String>();
 	 public static List<String>RowList= new ArrayList<String>();
+	 public static List<String>CategoryList= new ArrayList<String>();
 	 public static List<String>ImageList= new ArrayList<String>();
 	 ArrayList<Constructorusermenu> DisplayData = new ArrayList<Constructorusermenu>();
 
@@ -77,7 +78,7 @@ public class UsermenuItems extends Activity  {
 		   RowId=getdetails.getString(0);
 	    Name=getdetails.getString(1);
 	  Price=getdetails.getString(2);
-	// Category=getdetails.getString(3);
+	 Category=getdetails.getString(3);
 	  Des=getdetails.getString(4);
 	 Image=getdetails.getString(5);
 	 
@@ -92,6 +93,8 @@ public class UsermenuItems extends Activity  {
         System.out.println("name::::::::::"+Name);
        menuList.add(Name+":"+Price);
          Log.d("menulist",""+menuList);
+         CategoryList.add(Category);
+         Log.d(" CategoryList",""+ CategoryList);
          desList.add(Des);
          Log.d("desList",""+desList);
          RowList.add(RowId);
@@ -145,6 +148,7 @@ public class UsermenuItems extends Activity  {
 			
 		 		Intent in=new Intent(getApplicationContext(),Order.class);    
 			     startActivity(in);
+			     finish();
 		}
 		});
 	 dl.open();

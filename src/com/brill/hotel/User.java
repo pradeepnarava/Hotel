@@ -135,7 +135,7 @@ public class User extends Activity {
 						Intent menu = new Intent(User.this,
 								UserMenu.class);
 				    	startActivity(menu);
-						
+						finish();
 						
 				    	Toast.makeText(User.this,"Successfully User Logged In", Toast.LENGTH_LONG).show();
 					

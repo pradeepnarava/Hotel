@@ -40,6 +40,7 @@ public class UserCategory extends Activity  {
 	  public static String namcat;
 	 ArrayList<Constructor> DisplayData = new ArrayList<Constructor>();
 	 public static List<String>catList= new ArrayList<String>();
+	 public static List<String>categoryList= new ArrayList<String>();
 	 public static List<String>nameList= new ArrayList<String>();
 		HashMap<String, String>hashList = new HashMap<String, String>();
 	 @Override
@@ -199,6 +200,7 @@ public class UserCategory extends Activity  {
 				 		 dm.open();
 				 		  Cursor getitems=dm.getlistcat(cat);
 				 		  Log.d("category",""+cat);
+				 		  //categoryList.add(cat);
 				 		  dm.close();
 				 		if(getitems.getCount()==0){
 				 			Toast.makeText(UserCategory.this,cat+"  "+"Items are not avilable", Toast.LENGTH_LONG).show();

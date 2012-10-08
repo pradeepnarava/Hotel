@@ -278,6 +278,7 @@ public class UserMenu extends Activity {
 								Intent menu = new Intent(UserMenu.this,
 										User.class);
 						    	startActivity(menu);
+						    	finish();
 								
 								
 						    	Toast.makeText(UserMenu.this,"Success", Toast.LENGTH_LONG).show();

@@ -3,12 +3,13 @@ package com.brill.hotel;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.json.JSONException;
+import org.json.JSONObject;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.database.Cursor;
@@ -16,6 +17,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -33,7 +35,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class OrderList extends Activity{
-	
+	 String aString;
 	ListView orderlist;
 	String Name,Price,Qun,Pricetext;
 	 Dialog d;
@@ -46,22 +48,32 @@ public class OrderList extends Activity{
 	 int aInt;
 	 public static int i,p;
 	 int s;
+	 String id;
 	 DataTax data;
+	 private static final String TAG_ID = "id";
+	 private static String KEY_SUCCESS = "status";
 	public DataAdapter order;
 	 public static List<Integer>orderList= new ArrayList<Integer>();
 	 public static List<String>NameList= new ArrayList<String>();
 	 public static List<String>PriceList= new ArrayList<String>();
 	 public static List<Integer>qunorderList= new ArrayList<Integer>();
 	 static ArrayList<Constructororder> DisplayData = new ArrayList<Constructororder>();
+	@TargetApi(9)
 	protected void onCreate(Bundle savedInstanceState) {
 		  // TODO Auto-generated method stub
 		
 		  super.onCreate(savedInstanceState);
 		  setContentView(R.layout.orderlist);
+		  
+		  StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+
+			StrictMode.setThreadPolicy(policy); 
 		  data=new DataTax(this);
 		  dl=new DataLogo(this);
 		  orderList.clear();
 		  DisplayData.clear();
+		  NameList.clear();
+		  PriceList.clear();
 		  total=(TextView)findViewById(R.id.total);
 		  tp=(TextView)findViewById(R.id.totalprice);
 		  totaltax=(TextView)findViewById(R.id.totaltax);
@@ -115,6 +127,127 @@ public class OrderList extends Activity{
 					}
 				}
 				});*/
+		  Button finalorder=(Button)findViewById(R.id.finalorder);
+		  finalorder.setOnClickListener(new View.OnClickListener() {
+			
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				
+				   
+					String[] arr = NameList.toArray(new String[NameList.size()]);
+					//String item_name = Arrays.toString(arr);
+					/*Log.d("Stringgggggggggg",""+item_name);
+					//String item_name=NameList.get(r);
+		         Log.d("item_name;",""+item_name);*/
+		         String item_name = "";
+		         String separator=",";
+				    if (arr.length > 0) {
+				    	item_name = arr[0];    // start with the first element
+				        for (int i=1; i<arr.length; i++) {
+				        	item_name =item_name + separator + arr[i];
+				        }
+				    }
+		         Log.d("result",""+item_name);
+		         
+		         
+		         
+		         
+		         String[] pricearr = PriceList.toArray(new String[PriceList.size()]);
+		     // String Orderprice=Arrays.toString(pricearr);
+		      String Orderprice = "";
+		        // String separator=",";
+				    if (pricearr.length > 0) {
+				    	Orderprice = pricearr[0];    // start with the first element
+				        for (int i=1; i<pricearr.length; i++) {
+				        	Orderprice =Orderprice + separator + pricearr[i];
+				        }
+				    }
+		         Log.d("Orderprice",""+Orderprice);
+		     Log.d("Orderprice;",""+Orderprice);
+		     
+		     String[] qunarr = Order.qunList.toArray(new String[Order.qunList.size()]);
+		     //String OrderQun=Arrays.toString(qunarr);
+		     String OrderQun = "";
+		        // String separator=",";
+				    if ( qunarr.length > 0) {
+				    	OrderQun =  qunarr[0];    // start with the first element
+				        for (int i=1; i< qunarr.length; i++) {
+				        	OrderQun =OrderQun + separator +  qunarr[i];
+				        }
+				    }
+		         Log.d("OrderQun",""+OrderQun);
+			Log.d("OrderQun",""+OrderQun);
+			
+			
+			String[] categoryarr = Order.CatList.toArray(new String[Order.CatList.size()]);
+			//String Category=Arrays.toString(categoryarr);
+			 String Category = "";
+		        // String separator=",";
+				    if ( categoryarr.length > 0) {
+				    	Category =  categoryarr[0];    // start with the first element
+				        for (int i=1; i< categoryarr.length; i++) {
+				        	Category =Category + separator +  categoryarr[i];
+				        }
+				    }
+		         Log.d("Category",""+Category);
+			Log.d("Category",""+Category);
+			
+			UserFunctions userFunction = new UserFunctions();
+			JSONObject json = userFunction.UserOrder(item_name,Orderprice,OrderQun,"Jeg",Category,aString);
+			Log.d("json",""+json);
+			
+			try {
+				id = json.getString(TAG_ID);
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}//"id":1
+			Log.d("id",""+id);
+			/*try {
+				if (json.getString(KEY_SUCCESS) != null) {
+					
+					String res = json.getString(KEY_SUCCESS); 
+					if(Integer.parseInt(res) == 1){
+						
+						JSONObject json_user = json.getJSONObject("HotelApp");
+						
+						
+					
+						
+					}else
+					{
+						
+					}
+				}
+			} catch (JSONException e) {
+				e.printStackTrace();
+			}*/
+				
+				
+				
+				
+			}
+		});
+		  Button bill=(Button)findViewById(R.id.checkOut);
+		  bill.setOnClickListener(new View.OnClickListener() {
+			
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				if(id==null){
+					Toast.makeText(OrderList.this, "First Order the Items", Toast.LENGTH_SHORT).show();
+
+				}
+				else{
+				UserFunctions userFunction = new UserFunctions();
+				JSONObject json = userFunction.CheckOut(id);
+				Log.d("json",""+json);
+				Log.d("id",""+id);
+				
+				}
+				
+			}
+		});
+		  
 		orderlist.setOnItemClickListener(new OnItemClickListener() {
 
 			public void onItemClick(AdapterView<?> parent, View view,
@@ -140,7 +273,7 @@ public class OrderList extends Activity{
 		 		Log.d("Name",""+Name);
 		 		final EditText t3=(EditText)d.findViewById(R.id.price);
 		 	   // t3.setText(Price);
-		 		t3.setVisibility(View.FIND_VIEWS_WITH_CONTENT_DESCRIPTION);
+		 		//t3.setVisibility(View.FIND_VIEWS_WITH_CONTENT_DESCRIPTION);
 		 		Log.d("Price",""+Price);
 		 		Button ok=(Button)d.findViewById(R.id.edit);
 		 		Button del=(Button)d.findViewById(R.id.del);
@@ -233,7 +366,7 @@ public class OrderList extends Activity{
 			    Log.d("",""+tal);
 			    float tt=tal+(tal/aInt);
 			    String ttax = Float.toString(tal/aInt);
-			    String aString = Float.toString(tt);
+			     aString = Float.toString(tt);
 			     tp.setText(aString+" With"+tax+"%of Tax");
 			     Log.d("tp",""+tp);
 			     totaltax.setText(ttax);
@@ -363,13 +496,13 @@ public class OrderList extends Activity{
 	    		return super.onOptionsItemSelected(item);
 	    	}
 	    }
-	    @Override
+	   /* @Override
 	    public void onBackPressed() {
 	    	Log.d("back","back");
 	           // Do as you please
 	    	 Intent in=new Intent(getApplicationContext(),Order.class);    
 		     startActivity(in); 
-	    }
+	    }*/
 	    private void getOrder() {
 			// TODO Auto-generated method stub
 			 for(int p=0;p<Order.orderList.size();p++) {
