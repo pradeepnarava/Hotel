@@ -1,14 +1,11 @@
 package com.brill.hotel;
 
-import java.io.ByteArrayOutputStream;
-
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.graphics.Bitmap;
 
 public class DataMenuImage {
 
@@ -17,13 +14,15 @@ public class DataMenuImage {
 	public static final String KEY_DESCRIPTION = "description";
 	public static final String KEY_PRICE = "price";
 	public static final String KEY_IMAGE= "image";
+	
+	public static final String KEY_ITEM_ID= "item_id";
 	public static final String KEY_CATEGORY = "category";
 	private static final String DATABASE_NAME = "Add MenuImage";
 	private static final String DATABASE_TABLE = "menuimage";
 	private static final int DATABASE_VERSION = 100;
 
 	private static final String DATABASE_CREATE =
-	    "create table menuimage(_id integer primary key autoincrement , "+ "name text not null,"+"price number not null,"+"category text not null,"+"description text not null,"+"image text not null)";
+	    "create table menuimage(_id integer primary key autoincrement , "+ "name text not null,"+"price number not null,"+"category text not null,"+"description text not null,"+"image text not null,"+"item_id text not null)";
 
 	private final Context context; 
 	private DatabaseHelper DBHelper;
@@ -74,7 +73,7 @@ public class DataMenuImage {
 	}
 
 	//---insert a title into the database---
-	public long insertval(int _id,String name,String price,String category,String description,String image) 
+	public long insertval(int _id,String name,String price,String category,String description,String image,String item_id) 
 	{
 		
 		
@@ -88,6 +87,7 @@ public class DataMenuImage {
 	    
 	    initialValues.put(KEY_DESCRIPTION, description);
 	    initialValues.put(KEY_IMAGE, image);
+	    initialValues.put(KEY_ITEM_ID, item_id);
 	    System.out.println("name::::::::"+name);
 	    
 	    
@@ -104,7 +104,7 @@ public class DataMenuImage {
 		Cursor mCursor =
 	     db.query(DATABASE_TABLE, new String[] {
 	    		 
-	    		KEY_NAME,KEY_PRICE,KEY_CATEGORY,KEY_DESCRIPTION,KEY_IMAGE
+	    		KEY_NAME,KEY_PRICE,KEY_CATEGORY,KEY_DESCRIPTION,KEY_IMAGE,KEY_ITEM_ID
 	            },
 	            null,
 	            null, 
@@ -124,7 +124,7 @@ public class DataMenuImage {
 			Cursor mCursor =
 				     db.query(DATABASE_TABLE, new String[] {
 				    		 
-				    		KEY_NAME,KEY_PRICE,KEY_CATEGORY,KEY_DESCRIPTION
+				    		KEY_NAME,KEY_PRICE,KEY_CATEGORY,KEY_DESCRIPTION,KEY_ITEM_ID
 				            }, 
 				            null, 
 				            null, 
@@ -151,7 +151,7 @@ public class DataMenuImage {
 	public Cursor getTitle(long rowId) throws SQLException 
 	{
 	    Cursor mCursor =  db.query(true, DATABASE_TABLE, new String[] {
-	    		KEY_ROWID ,KEY_NAME,KEY_PRICE,KEY_CATEGORY,KEY_DESCRIPTION,KEY_IMAGE
+	    		KEY_ROWID ,KEY_NAME,KEY_PRICE,KEY_CATEGORY,KEY_DESCRIPTION,KEY_IMAGE,KEY_ITEM_ID
 	            		}, 
 	            		KEY_ROWID+ "=" + rowId, 
 	            		null,
@@ -173,6 +173,7 @@ public class DataMenuImage {
 	    args.put(KEY_CATEGORY, category);
 	    args.put(KEY_DESCRIPTION, description);
 	    args.put(KEY_IMAGE, image);
+	    //args.put(KEY_ITEM_ID, item_id);
 	    return db.update(DATABASE_TABLE, args, 
 	                     KEY_ROWID + "=" + rowId, null) > 0;
 	}

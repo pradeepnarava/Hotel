@@ -17,7 +17,7 @@
     <TextView 
  	android:id="@+id/qun" 
  	android:layout_width="wrap_content"
- 	android:text="QNT"
+ 	android:text="QUN"
  	android:textSize="15dp"
  	android:gravity="center"
  	android:textColor="#000000"
@@ -117,19 +117,36 @@
  	android:textStyle="bold"
  	/>   
 </LinearLayout>
-<Button android:id="@+id/finalorder"
+<LinearLayout android:layout_width="fill_parent"
+    android:layout_height="50dp" 
+    android:orientation="horizontal"
+    android:layout_weight="1">
+    <Button android:id="@+id/finalorder"
  	android:layout_width="fill_parent"
  	android:textColor="#000000"
- 	android:text="Final Order"
+ 	android:text="Order Items"
  	android:textSize="20dp"
-  android:layout_weight="0.50"
+ 
   android:gravity="center"
+  android:layout_weight="0.5"
  	android:layout_height="50dp" 
  	android:textStyle="bold"/>
+    <Button android:id="@+id/list_of_items"
+ 	android:layout_width="fill_parent"
+ 	android:textColor="#000000"
+ 	android:text="List of Items"
+ 	android:textSize="20dp"
+ 
+  android:gravity="center"
+  android:layout_weight="0.5"
+ 	android:layout_height="50dp" 
+ 	android:textStyle="bold"/>
+</LinearLayout>
+
 <Button android:id="@+id/checkOut"
  	android:layout_width="fill_parent"
  	android:textColor="#000000"
- 	android:text="CheckOut"
+ 	android:text="Order Bill"
  	android:textSize="20dp"
   android:layout_weight="0.50"
   android:gravity="center"

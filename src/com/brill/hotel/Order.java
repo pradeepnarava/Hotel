@@ -8,6 +8,7 @@ import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -21,6 +22,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.Spinner;
@@ -31,15 +33,20 @@ public class Order extends Activity{
 	TextView name,price,des;
 	Button order,cal;
 	 String pathName;
+	static String table_num;
 	String Name,Price;
 	 String category;
-	DataMenuImage data;
+	//DataMenuImage data;
 	ImageView img;
-	public static String position;
+	DataOrder dorder; 
+	public static String position,PreviousId;
 	Bitmap b;
+	 EditText number;
 	ScrollView l1,l2;
 	private Dialog dialog;
 	 public static List<String>orderList= new ArrayList<String>();
+	 public static List<String>orderIdList= new ArrayList<String>();
+	 public static List<String>orderTableList= new ArrayList<String>();
 	 public static List<String>qunList= new ArrayList<String>();
 	 public static List<String>CatList= new ArrayList<String>();
 	 public static List<Integer>total= new ArrayList<Integer>();
@@ -51,7 +58,8 @@ public class Order extends Activity{
 		  setContentView(R.layout.order);
 		  //orderList.clear();
 		//  qunList.clear();
-		  data=new DataMenuImage(this);
+		 // data=new DataMenuImage(this);
+		  dorder=new DataOrder(this);
 		  name=(TextView)findViewById(R.id.name);
 		  price=(TextView)findViewById(R.id.price);
 		 des=(TextView)findViewById(R.id.des);
@@ -86,6 +94,7 @@ public class Order extends Activity{
 		  Log.d("des",""+stri);
 		  des.setText(stri);
 		  Log.d("des",""+des);
+		 
 		 category=UsermenuItems.CategoryList.get(p);
 		  Log.d("category",""+category);
 		  String row=UsermenuItems.RowList.get(p);
@@ -147,7 +156,50 @@ public class Order extends Activity{
 			}
         	  
           });
-          
+       /*  final Dialog dialog1 = new Dialog(this);
+
+			 dialog1.setContentView(R.layout.table_no);
+			 dialog1.setTitle("Tips");
+			 dialog1.show();
+			 TextView text=(TextView)dialog1.findViewById(R.id.tv_tableno);
+			  number=(EditText)dialog1.findViewById(R.id.table_num);
+			 Button enter=(Button)dialog1.findViewById(R.id.enter);
+			 enter.setOnClickListener(new View.OnClickListener() {
+				
+				public void onClick(View v) {
+					// TODO Auto-generated method stub
+					//table_num=number.getText().toString();
+					dorder.open();
+					 Cursor getorder=dorder.getlistitems();
+					dorder.close();
+					if(getorder.getCount()>0){
+					 if(getorder.moveToFirst())
+					  {
+					   do{
+					String OrderId=getorder.getString(0);
+                    Log.d("OrderId",""+OrderId);
+                    orderIdList.add(OrderId);
+                    String Ordertable=getorder.getString(1);
+                    Log.d("Ordertable",""+Ordertable);
+                    orderTableList.add(Ordertable);
+				        
+					   }while(getorder.moveToNext());
+					  }
+					}
+					 getorder.close();
+					Log.d("table num",""+table_num);
+					
+					for (int i = 0; i < orderTableList.size(); i++) {
+					    if(table_num.equals(orderTableList.get(i))) {
+					    	 PreviousId=orderIdList.get(i);
+					    	Log.d("previousid",""+PreviousId);
+					        
+					    }
+					}
+
+					dialog1.dismiss();
+				}
+			});*/
           order.setOnClickListener(new View.OnClickListener() {
 				public void onClick(View v) {
 					Name=name.getText().toString();
@@ -155,11 +207,13 @@ public class Order extends Activity{
 		              int p=Integer.parseInt(Price);
 		              orderList.add(Name+":"+Price);
 		              Log.d("orderList",""+orderList);
-		              CatList.add(category);
+		              CatList.add(UserCategory.namcat);
 		              total.add(p);
 		              Log.d("total",""+total);
 		              qunList.add(position);
 		              Log.d("qunList",""+qunList.size());
+						Toast.makeText(Order.this, "selected items are ordered", Toast.LENGTH_SHORT).show();
+
 		              Runnable showWaitDialog = new Runnable() {
 
 		       			public void run() {
@@ -187,7 +241,10 @@ public class Order extends Activity{
           });
           cal.setOnClickListener(new View.OnClickListener() {
 				public void onClick(View v) {
-					int tal = 0;
+					Intent in=new Intent(getApplicationContext(),OrderList.class);    
+				     startActivity(in);
+				    
+					/*int tal = 0;
 					for (Integer i : total) { // assuming list is of type List<Integer>
 					    tal = tal + i;
 					    Log.d("",""+tal);
@@ -195,7 +252,7 @@ public class Order extends Activity{
 					     startActivity(in);
 					     finish();
 					    //Toast.makeText(getApplicationContext(),tal, Toast.LENGTH_SHORT).show();
-					}
+					}*/
 				}
 				});
 	}
@@ -213,18 +270,21 @@ public class Order extends Activity{
 	    	case R.id.next:
 	    		Intent gal=new Intent(getApplicationContext(),UsermenuItems.class);    
 			     startActivity(gal);
+			     finish();
 	    		/*Toast.makeText(this, "You have chosen the " + getResources().getString(R.string.next) + " menu option",
 	            		Toast.LENGTH_SHORT).show();*/
 	    		return true;
 	    	case R.id.previous:
 	    		Intent in=new Intent(getApplicationContext(),UserCategory.class);    
 			     startActivity(in);
+			     finish();
 	    		/*Toast.makeText(this, "You have chosen the " + getResources().getString(R.string.previous) + " menu option",
 	            		Toast.LENGTH_SHORT).show();*/
 	    		return true;
 	    	case R.id.list:
 	    		Intent menu=new Intent(getApplicationContext(),UserMenu.class);    
 			     startActivity(menu);
+			     finish();
 	    		/*Toast.makeText(this, "You have chosen the " + getResources().getString(R.string.list) + " menu option",
 	            		Toast.LENGTH_SHORT).show();*/
 	    		return true;

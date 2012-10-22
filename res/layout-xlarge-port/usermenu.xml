@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" 
+    android:id="@+id/usermenu">
+    
+    <EditText
+        android:id="@+id/table"
+        android:layout_width="240dp"
+         
+        android:layout_height="80dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="280dp" 
+        android:inputType="number|textNoSuggestions"
+        android:hint="Table Number"
+        android:textSize="25dp"/>
+    
+    <Button
+        android:layout_marginTop="40dp"
+        android:id="@+id/menu"
+        android:layout_width="500dp"
+        android:layout_height="80dp"
+        
+        android:layout_gravity="center"
+        android:textSize="35dp"
+        android:text="Menu" />
+
+    <Button
+        android:layout_marginTop="40dp"
+        android:id="@+id/contact"
+        android:layout_width="500dp"
+        android:layout_height="80dp"
+        
+        android:layout_gravity="center"
+        android:textSize="35dp"
+        android:text="ContactUs" />
+
+    <Button
+        android:layout_marginTop="40dp"
+        android:id="@+id/gallery"
+        android:layout_width="500dp"
+        android:layout_height="80dp"
+        
+        android:layout_gravity="center"
+        android:textSize="35dp"
+        android:text="Gallery" />
+<Button
+        android:layout_marginTop="40dp"
+        android:id="@+id/logout"
+       android:layout_width="500dp"
+        android:layout_height="80dp"
+        
+        android:layout_gravity="center"
+        android:textSize="35dp"
+        android:text="Logout" />
+    
+    <RatingBar
+        android:id="@+id/feedback"
+        android:layout_width="290dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp" />
+
+    <TextView android:id="@+id/rating"
+android:layout_width="300dp"
+android:layout_gravity="center"
+android:layout_height="wrap_content"
+android:textSize="35dp"/>
+
+</LinearLayout>

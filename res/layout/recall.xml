@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+         <LinearLayout
+             android:layout_width="fill_parent"
+             android:layout_height="wrap_content"
+             android:orientation="horizontal" >
+
+        <!-- Cost Label -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#5d5d5d"
+            android:gravity="left"
+            android:textStyle="bold"
+            android:text="Item_name: " >
+        </TextView>
+		<!-- Name Label -->
+        <TextView
+            android:id="@+id/up_name"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#43bd00"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:paddingTop="6dip"
+            android:paddingBottom="2dip" />
+        </LinearLayout>
+		<!-- Description label -->
+
+		 <LinearLayout
+		     android:layout_marginTop="10dp"
+		     android:layout_width="fill_parent"
+		     android:layout_height="wrap_content"
+		     android:orientation="horizontal" >
+
+        <!-- Cost Label -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#5d5d5d"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:text="Quantity: " >
+        </TextView>
+        <TextView
+            android:id="@+id/up_qun"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#acacac"
+            android:paddingBottom="2dip">
+        </TextView>
+        </LinearLayout>
+        <!-- Linear layout for cost and price Cost: Rs.100 -->
+        <LinearLayout  android:layout_marginTop="10dp"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <!-- Cost Label -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#5d5d5d"
+            android:gravity="left"
+            android:textStyle="bold"
+            android:text="Price: " >
+        </TextView>
+        <!-- Price Label -->
+        <TextView
+            android:id="@+id/up_price"
+            android:layout_width="220dp"
+            android:layout_height="wrap_content"
+            android:textColor="#acacac" 
+            android:textStyle="bold"
+            android:gravity="left">
+        </TextView>
+
+        
+
+      
+       
+        </LinearLayout>
+    </LinearLayout>

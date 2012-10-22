@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="700dp"
+    android:layout_height="match_parent"
+    android:orientation="vertical" 
+    android:layout_gravity="center">
+
+    <ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+      android:layout_marginTop="100dp"
+        android:src="@drawable/ic_launcher" />
+
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:text="Goto Gallery"
+        android:textSize="25dp" />
+
+    <Button
+        android:id="@+id/button2"
+         android:textSize="25dp" 
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:text="Goto camera" />
+
+</LinearLayout>

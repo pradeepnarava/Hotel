@@ -1,27 +1,23 @@
 package com.brill.hotel;
 
-import java.io.ByteArrayOutputStream;
-
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.graphics.Bitmap;
 
 public class DataOrder {
 	public static final String KEY_ROWID = "_id";
-	public static final String KEY_NAME = "name";
+	public static final String KEY_TABLE_ID = "table_id";
+	public static final String KEY_TABLE_NUM = "number";
 	
-	public static final String KEY_PRICE = "price";
-	
-	private static final String DATABASE_NAME = "Order";
+	private static final String DATABASE_NAME = "TableOrder";
 	private static final String DATABASE_TABLE = "orders";
 	private static final int DATABASE_VERSION = 100;
 
 	private static final String DATABASE_CREATE =
-	    "create table orders(_id integer primary key autoincrement , "+ "name text not null,"+"price number not null)";
+	    "create table orders(_id integer primary key autoincrement,"+ "table_id text not null,"+"number text not null)";
 
 	private final Context context; 
 	private DatabaseHelper DBHelper;
@@ -72,28 +68,28 @@ public class DataOrder {
 	}
 
 	//---insert a title into the database---
-	public long insertval(int _id,String name,String price,Bitmap b) 
+	public long insertval(int _id,String table_id,String number) 
 	{
-		ByteArrayOutputStream out = new ByteArrayOutputStream();
-	    b.compress(Bitmap.CompressFormat.PNG, 10, out);
+		
 		
 		
 		ContentValues initialValues = new ContentValues();
 	    
 
-	    initialValues.put(KEY_NAME, name);
-	    initialValues.put(KEY_PRICE, price);
+	  
+	    initialValues.put(KEY_TABLE_ID, table_id);
+	    initialValues.put(KEY_TABLE_NUM,number);
 	   
-	    System.out.println("name::::::::"+name);
+	  
 	    
 	    
 	    
 	    return db.insert(DATABASE_TABLE, null, initialValues);
 	}
 
-	  public boolean deleteTitle(long rowId) 
+	  public boolean deleteTitle(String table_id) 
 	    {
-	        return db.delete(DATABASE_TABLE, KEY_ROWID + "=" + rowId, null) > 0;
+	        return db.delete(DATABASE_TABLE, KEY_TABLE_ID + "=" + table_id, null) > 0;
 	    }
 	 
 	public Cursor getlistitems() 
@@ -101,7 +97,7 @@ public class DataOrder {
 		Cursor mCursor =
 	     db.query(DATABASE_TABLE, new String[] {
 	    		 
-	    		KEY_NAME,KEY_PRICE
+	    		 KEY_TABLE_ID,KEY_TABLE_NUM
 	            }, 
 	            null, 
 	            null, 
@@ -113,11 +109,11 @@ public class DataOrder {
 	    }
 	    return mCursor;
 	}
-	 public boolean updateTitle(long rowId, String name)
+	 public boolean updateTitle(long rowId, String table_id)
 	    
 	    {
 	        ContentValues args = new ContentValues();
-	        args.put(KEY_NAME, name);
+	        args.put(KEY_TABLE_ID, table_id);
 	       
 	        return db.update(DATABASE_TABLE, args, 
 	                         KEY_ROWID + "=" + rowId, null) > 0;

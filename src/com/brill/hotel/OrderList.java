@@ -3,6 +3,7 @@ package com.brill.hotel;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -48,13 +49,37 @@ public class OrderList extends Activity{
 	 int aInt;
 	 public static int i,p;
 	 int s;
-	 String id;
+	 static String id;
 	 DataTax data;
+	// DataLogin dlogin;
+	 DataOrder dorder;
+	 JSONParser jParser;
+	String Table_num;
+	 private static final String TAG_UPDATEID = "updateid";
+	 public static List<String>orderIdList= new ArrayList<String>();
+	 public static List<String>orderTableList= new ArrayList<String>();
+	 public static List<String>UserList= new ArrayList<String>();
+	 public static List<String>TableList= new ArrayList<String>();
 	 private static final String TAG_ID = "id";
-	 private static String KEY_SUCCESS = "status";
+	/* private static final String TAG_HOTEL_ID = "hotelsession_id";
+	 private static final String TAG_QUANTITY = "quantity";
+	 private static final String TAG_PRICE = "price";
+	 private static final String TAG_ITEM_NAME = "item_name";
+	 private static String KEY_SUCCESS = "status";*/
 	public DataAdapter order;
+	JSONObject json,json1;
+	JSONArray results = null;
+	DataMenuImage dmi;
+	 String Order_itemid;
+	/*ListAdapter adapter;
+	 ArrayList<HashMap<String, String>> resultlist;
+	public  static final String TAG_RESULTS = "items";*/
+	String user,passw,Role,table_number;
+	//public static String PreviousId;
 	 public static List<Integer>orderList= new ArrayList<Integer>();
 	 public static List<String>NameList= new ArrayList<String>();
+	 public static List<String>ItemNameList= new ArrayList<String>();
+	 public static List<String>ItemIdList= new ArrayList<String>();
 	 public static List<String>PriceList= new ArrayList<String>();
 	 public static List<Integer>qunorderList= new ArrayList<Integer>();
 	 static ArrayList<Constructororder> DisplayData = new ArrayList<Constructororder>();
@@ -70,10 +95,15 @@ public class OrderList extends Activity{
 			StrictMode.setThreadPolicy(policy); 
 		  data=new DataTax(this);
 		  dl=new DataLogo(this);
+		  dmi=new DataMenuImage(this);
+		 // dlogin=new DataLogin(this);
+		  dorder=new DataOrder(this);
 		  orderList.clear();
 		  DisplayData.clear();
 		  NameList.clear();
 		  PriceList.clear();
+		  d=new Dialog(this);
+		 // resultlist = new ArrayList<HashMap<String, String>>();
 		  total=(TextView)findViewById(R.id.total);
 		  tp=(TextView)findViewById(R.id.totalprice);
 		  totaltax=(TextView)findViewById(R.id.totaltax);
@@ -97,8 +127,31 @@ public class OrderList extends Activity{
 		  }
 
 		 getdetails.close();
+		  
+		dmi.open();
+		Cursor getItems=dmi.getlistitems();
+		dmi.close();
+		  if(getItems.moveToFirst())
+		  {
+		   do{
+			 
+		  String item_name=getItems.getString(0);
+		   Log.d("item_name",""+item_name);
+		   String item_id=getItems.getString(5);
+	     Log.d("item_id",""+item_id);
+	     ItemNameList.add(item_name);
+	     Log.d("ItemNameList.size",""+ItemNameList.size());
+	     ItemIdList.add(item_id);
+	     Log.d("ItemIdList.size",""+ItemIdList.size());
+		   }while(getItems.moveToNext());
+		  }
+
+		  getItems.close();
+		  
+		  Table_num=UserMenu.Table_num;
+			Log.d("Table_num",""+Table_num);
 		  getOrder();
-		
+		  //getUpdateId();
 		 /*Qun=Order.position;
 		 Log.d("qqq",""+Qun);
 		 q=Integer.parseInt(Qun);
@@ -132,8 +185,8 @@ public class OrderList extends Activity{
 			
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				
-				   
+				d.setTitle("Please Wait.......");
+				d.show();
 					String[] arr = NameList.toArray(new String[NameList.size()]);
 					//String item_name = Arrays.toString(arr);
 					/*Log.d("Stringgggggggggg",""+item_name);
@@ -191,40 +244,39 @@ public class OrderList extends Activity{
 				    }
 		         Log.d("Category",""+Category);
 			Log.d("Category",""+Category);
-			
+
 			UserFunctions userFunction = new UserFunctions();
-			JSONObject json = userFunction.UserOrder(item_name,Orderprice,OrderQun,"Jeg",Category,aString);
-			Log.d("json",""+json);
 			
+				if(aString!=null){
+		      json = userFunction.UserOrder(Table_num,aString,item_name,OrderQun);
+			Log.d("json",""+json);
+			DisplayData.clear();
+			Order.orderList.clear();
+			 Order.qunList.clear();
+			 NameList.clear();
+			 PriceList.clear();
+			 Intent back=new Intent(getApplicationContext(),OrderList.class);
+			 startActivity(back);
+			 finish();
+			 d.dismiss();
 			try {
 				id = json.getString(TAG_ID);
 			} catch (JSONException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+				 d.dismiss();
 			}//"id":1
+			catch(NullPointerException e){
+				 e.printStackTrace();
+				 d.dismiss();
+			 }
 			Log.d("id",""+id);
-			/*try {
-				if (json.getString(KEY_SUCCESS) != null) {
+				}else{
+					 d.dismiss();
+					Toast.makeText(OrderList.this, "First Order the Items", Toast.LENGTH_SHORT).show();
 					
-					String res = json.getString(KEY_SUCCESS); 
-					if(Integer.parseInt(res) == 1){
-						
-						JSONObject json_user = json.getJSONObject("HotelApp");
-						
-						
-					
-						
-					}else
-					{
-						
-					}
 				}
-			} catch (JSONException e) {
-				e.printStackTrace();
-			}*/
-				
-				
-				
+			
 				
 			}
 		});
@@ -233,19 +285,54 @@ public class OrderList extends Activity{
 			
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				if(id==null){
+				/*if(id==null){
+					
 					Toast.makeText(OrderList.this, "First Order the Items", Toast.LENGTH_SHORT).show();
+					}
 
-				}
-				else{
+				else{*/
 				UserFunctions userFunction = new UserFunctions();
-				JSONObject json = userFunction.CheckOut(id);
+				json = userFunction.CheckOut( Table_num);
 				Log.d("json",""+json);
-				Log.d("id",""+id);
+				Log.d("Table_num",""+Table_num);
+				/*dorder.open();
+				dorder.deleteTitle( Table_num);
+				Log.d("deleted id",""+id);
+				dorder.close();*/
+				DisplayData.clear();
+				Order.orderList.clear();
+				 Order.qunList.clear();
+				 NameList.clear();
+				 PriceList.clear();
+				 Intent back=new Intent(getApplicationContext(),OrderList.class);
+				 startActivity(back);
+				 finish();
+				//}
 				
-				}
 				
 			}
+		});
+		  Button list_of_items=(Button)findViewById(R.id.list_of_items);
+		 list_of_items.setOnClickListener(new View.OnClickListener() {
+			
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				/*if(Table_num==null){
+					
+					Toast.makeText(OrderList.this, "First Order the Items", Toast.LENGTH_SHORT).show();
+					
+					}
+
+				
+				else{*/
+					 Intent intent=new Intent(getApplicationContext(),Recall.class);
+					 intent.putExtra(TAG_UPDATEID,Table_num );
+					 Log.d("id",""+Table_num);
+					 startActivity(intent);
+				//}
+			}
+
+			
 		});
 		  
 		orderlist.setOnItemClickListener(new OnItemClickListener() {
@@ -262,7 +349,7 @@ public class OrderList extends Activity{
 				 Log.d("x",""+x);
 		 		d=new Dialog(x);
 		 		d.setContentView(R.layout.edit_orderlist);
-		 		d.setTitle("ENTER MODIFIED DATA");
+		 		d.setTitle("EDIT QUANTITY");
 		 		d.show();
 		 		final EditText t1=(EditText)d.findViewById(R.id.qun);
 		 		t1.setText(Order.qunList.get(s));
@@ -309,6 +396,8 @@ public class OrderList extends Activity{
 						 orderlist.setAdapter(order);
 						 Order.orderList.remove(s);
 						 Order.qunList.remove(s);
+						 NameList.remove(s);
+						 PriceList.remove(s);
 						 TotalOrderPrice();
 						// getOrder();
 						 Log.d("TotalOrderPrice","TotalOrderPrice");
@@ -354,18 +443,96 @@ public class OrderList extends Activity{
 		 
 	}
 	
+	/*private void getUpdateId() {
+		// TODO Auto-generated method stub
+		dlogin.open();
+		  Cursor getdetails=dlogin.getlistitems();
+		  dlogin.close();
+		  if(getdetails.moveToFirst())
+		  {
+		   do{
+		   user=getdetails.getString(0);
+		  passw=getdetails.getString(1);
+		 Role=getdetails.getString(2);
+		 table_number=getdetails.getString(3);
+	        System.out.println("name::::::::::"+Name);
+	      
+	        Log.d("Name",""+user);
+			  Log.d("Pass",""+passw);
+			  Log.d("Role",""+Role);
+			  UserList.add(user);
+			  Log.d("fsafsdaf",""+UserList.size());
+			  TableList.add(table_number);
+		   }while(getdetails.moveToNext());
+		  }
+
+		 getdetails.close();
+		 for (int i = 0; i < TableList.size(); i++) {
+			    if(User.Name.equals(UserList.get(i))) {
+			    	Log.d("User.Name",""+User.Name);
+			    	 Table_num=TableList.get(i);
+			    	Log.d("Table_num",""+Table_num);
+			        
+			    }
+			}
+		
+		 Log.d("Table_num",""+Table_num);
+		 
+		 if(Table_num!=null){
+			dorder.open();
+			 Cursor getorder=dorder.getlistitems();
+			dorder.close();
+			if(getorder.getCount()>0){
+			 if(getorder.moveToFirst())
+			  {
+			   do{
+			String OrderId=getorder.getString(0);
+       Log.d("OrderId",""+OrderId);
+       orderIdList.add(OrderId);
+       String Ordertable=getorder.getString(1);
+       Log.d("Ordertable",""+Ordertable);
+       orderTableList.add(Ordertable);
+		        
+			   }while(getorder.moveToNext());
+			  }
+			}
+			 getorder.close();
+			Log.d("Table_num",""+Table_num);
+			
+			for (int i = 0; i < orderTableList.size(); i++) {
+			    if(Table_num.equals(orderTableList.get(i))) {
+			    	 PreviousId=orderIdList.get(i);
+			    	Log.d("previousid",""+PreviousId);
+			        
+			    }
+			}
+		 }
+	}*/
+
 	private void TotalOrderPrice() {
 		// TODO Auto-generated method stub
 		 if(tax==null){
+			 int tal = 0;
+				for (Integer i : orderList) { 
+				    tal = (tal + i);
+				    Log.d("",""+tal);
+				    float tt=tal;
+				    String ttax = "0";
+				     aString = Float.toString(tt);
+				     tp.setText(aString+" With"+0+"%of Tax");
+				     Log.d("tp",""+tp);
+				     totaltax.setText(ttax);
+				     Log.d("tp",""+tp);
+				     }
 				Toast.makeText(getApplicationContext(), "Please check ur tax details", Toast.LENGTH_SHORT).show();
 			}
 			else{
 			int tal = 0;
-			for (Integer i : orderList) { // assuming list is of type List<Integer>
+			for (Integer i : orderList) { 
 			    tal = (tal + i);
 			    Log.d("",""+tal);
-			    float tt=tal+(tal/aInt);
-			    String ttax = Float.toString(tal/aInt);
+			    float tt=tal+(tal*aInt/100);
+			    String ttax = Float.toString(tal*aInt/100);
 			     aString = Float.toString(tt);
 			     tp.setText(aString+" With"+tax+"%of Tax");
 			     Log.d("tp",""+tp);
@@ -477,18 +644,21 @@ public class OrderList extends Activity{
 	    	case R.id.next:
 	    		Intent gal=new Intent(getApplicationContext(),UsermenuItems.class);    
 			     startActivity(gal);
+			     finish();
 	    		/*Toast.makeText(this, "You have chosen the " + getResources().getString(R.string.next) + " menu option",
 	            		Toast.LENGTH_SHORT).show();*/
 	    		return true;
 	    	case R.id.previous:
 	    		Intent in=new Intent(getApplicationContext(),UserCategory.class);    
 			     startActivity(in);
+			     finish();
 	    		/*Toast.makeText(this, "You have chosen the " + getResources().getString(R.string.previous) + " menu option",
 	            		Toast.LENGTH_SHORT).show();*/
 	    		return true;
 	    	case R.id.list:
 	    		Intent menu=new Intent(getApplicationContext(),UserMenu.class);    
 			     startActivity(menu);
+			     finish();
 	    		/*Toast.makeText(this, "You have chosen the " + getResources().getString(R.string.list) + " menu option",
 	            		Toast.LENGTH_SHORT).show();*/
 	    		return true;
@@ -520,7 +690,14 @@ public class OrderList extends Activity{
 
 	           Name=str[s];
 	              Log.d("split lat",""+Name);
-	              NameList.add(Name);
+	              for (int i = 0; i < ItemNameList.size(); i++) {
+	  			    if( Name.equals(ItemNameList.get(i))) {
+	  			    	 Order_itemid=ItemIdList.get(i);
+	  			    	Log.d("Order_itemid",""+Order_itemid);
+	  			        
+	  			    }
+	  			}
+	              NameList.add(Order_itemid);
 	              Log.d("name list",""+NameList.size());
 	           Price=str[++s];
 	              Log.d("split long",""+Price);

@@ -1,7 +1,43 @@
  
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+    android:orientation="vertical" android:layout_width="fill_parent" 
+    android:layout_height="fill_parent"
     android:id="@+id/usercat">
-  <TextView android:id="@+id/name" android:layout_width="match_parent" android:layout_height="33dp" android:text="Menu" android:gravity="center" android:textColor="#000000" android:textSize="25dp" android:textStyle="bold" /> 
-  <View android:layout_width="fill_parent" android:layout_height="2dp" android:layout_marginTop="10dp" android:background="#000000" /> 
-  <ListView android:id="@+id/list" android:layout_width="fill_parent" android:layout_height="0dip" android:layout_weight="0.94" android:stackFromBottom="false" android:transcriptMode="normal" /> 
+    <LinearLayout   android:layout_width="match_parent" 
+      android:layout_height="40dp" 
+      android:layout_marginTop="5dp"
+        android:gravity="center" 
+      android:orientation="horizontal">
+  <TextView 
+      android:id="@+id/name" 
+      android:layout_width="wrap_content" 
+      android:layout_height="40dp" 
+      android:text="Menu" 
+      android:gravity="center" 
+      android:textColor="#000000" 
+      android:textSize="25dp"
+android:layout_marginLeft="120dp"
+      android:textStyle="bold" /> 
+      
+      <Button android:id="@+id/list_of_items" 
+      android:layout_width="wrap_content" 
+      android:layout_height="40dp" 
+      android:text="Items" 
+      android:textSize="15dp"
+     
+      android:layout_marginLeft="60dp"/>
+      </LinearLayout>
+  <View 
+      android:layout_width="fill_parent"
+       android:layout_height="3dp" 
+       android:layout_marginTop="5dp" 
+       android:background="#000000" /> 
+  <ListView 
+      android:id="@+id/list" 
+      android:layout_marginTop="10dp"
+      android:layout_width="fill_parent" 
+      android:layout_height="0dip" 
+      android:layout_weight="0.94" 
+      android:stackFromBottom="false" 
+      android:transcriptMode="normal" /> 
   </LinearLayout>

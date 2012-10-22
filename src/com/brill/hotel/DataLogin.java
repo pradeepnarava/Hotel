@@ -15,6 +15,7 @@ public class DataLogin {
 	public static final String KEY_NAME = "name";
 	public static final String KEY_PASSWORD = "password";
 	public static final String KEY_ROLL = "roll";
+	//public static final String KEY_TABLE = "tablenum";
 	private static final String DATABASE_NAME = "User Login";
 	private static final String DATABASE_TABLE = "login";
 	
@@ -86,6 +87,7 @@ public class DataLogin {
 	   
 	    initialValues.put(KEY_PASSWORD, password);
 	    initialValues.put(KEY_ROLL, roll);
+	    //initialValues.put(KEY_TABLE, tablenum);
 	   
 	    System.out.println("name::::::::"+name);
 	    
@@ -103,7 +105,7 @@ public class DataLogin {
 		Cursor mCursor =
 	     db.query(DATABASE_TABLE, new String[] {
 	    		 
-	    		KEY_NAME,KEY_PASSWORD,KEY_ROLL
+	    		KEY_NAME,KEY_PASSWORD,KEY_ROLL//,KEY_TABLE
 	            }, 
 	            null, 
 	            null, 

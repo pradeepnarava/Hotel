@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="vertical" android:layout_width="fill_parent"
+	android:layout_height="wrap_content" android:background="#ffffff"
+	android:layout_gravity="center">
+<Button
+        android:id="@+id/cat"
+        android:layout_width="600dp"
+        android:layout_height="60dp"
+       android:layout_gravity="center"
+        android:layout_marginTop="30dp"
+        android:text="Add Category"
+        android:textSize="30dp" />
+    <Button
+        android:id="@+id/add_menu" 
+       android:layout_width="600dp"
+        android:layout_height="60dp"
+       android:textSize="30dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="30dp" 
+        android:text="Menu"/>
+  <Button
+        android:id="@+id/add_tax" 
+         android:layout_width="600dp"
+        android:layout_height="60dp"
+       android:textSize="30dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp" 
+        android:text="Add Tax"/>
+    <Button
+        android:id="@+id/add_logo" 
+         android:layout_width="600dp"
+        android:layout_height="60dp"
+       android:textSize="30dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp" 
+        android:text="Add Logo"/>
+  
+<Button
+        android:id="@+id/add_contacts" 
+        android:layout_width="600dp"
+        android:layout_height="60dp"
+       android:textSize="30dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp" 
+        android:text="Add Contact Us"/>
+
+<Button
+        android:id="@+id/gallery" 
+        android:layout_width="600dp"
+        android:layout_height="60dp"
+       android:textSize="30dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp" 
+        android:text="Gallery"/>
+
+	<LinearLayout
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:orientation="horizontal"
+	      android:layout_gravity="center"
+	      android:layout_marginTop="30dp">
+
+	    <Button
+	        android:id="@+id/adduser"
+	         android:layout_width="300dp"
+        android:layout_height="60dp"
+       android:textSize="30dp"
+	        android:layout_gravity="left"
+	      
+	        android:layout_marginTop="5dp"
+	        android:layout_weight="0.11"
+	        android:text="Add User" >
+	    
+	    </Button>
+	    
+	    <Button
+	        android:id="@+id/logout"
+	         android:layout_width="300dp"
+        android:layout_height="60dp"
+       android:textSize="30dp"
+	        android:layout_gravity="left"
+	        
+	        android:layout_marginTop="5dp"
+	        android:layout_weight="0.11"
+	        android:text="Logout" >
+	    
+	    </Button>
+	    
+	    
+	</LinearLayout>
+	
+
+</LinearLayout>

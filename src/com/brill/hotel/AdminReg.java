@@ -15,10 +15,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class AdminReg extends Activity {
-	EditText name,pass,conf_pass,roll;
+	EditText name,pass,conf_pass,table_no;
 	Button log,canc;
 	TextView alrdy;
 	 String Name,Pass,Conf;
+	
 	 DataAdmin data;
 	
 		String Roll="admin";
@@ -43,6 +44,7 @@ public class AdminReg extends Activity {
 		name=(EditText)findViewById(R.id.admin_name);
 		pass=(EditText)findViewById(R.id.pass);
 		conf_pass=(EditText)findViewById(R.id.conf_pass);
+		
 		log=(Button)findViewById(R.id.login);
 		canc=(Button)findViewById(R.id.cancel);
 		 
@@ -86,6 +88,8 @@ public class AdminReg extends Activity {
 				data.insertval(1,Name,Pass,Roll);
 			//data.insertvaluser(1, Name, Pass, Roll, b);
 				data.close();
+				
+				
 				Intent add_menu = new Intent(AdminReg.this,
 						Menu.class);
 				startActivity(add_menu);

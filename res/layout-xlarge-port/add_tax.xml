@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+             
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/entertax"
+      android:layout_marginTop="60dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Enter Tax" 
+        android:textSize="50dp"
+       />
+
+    <EditText
+   
+        android:inputType="number|textNoSuggestions" 
+        android:singleLine="true"
+        android:id="@+id/tax"
+         android:layout_marginTop="40dp"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:ems="10"
+        >
+
+        <requestFocus />
+    </EditText>
+
+    <Button
+        android:id="@+id/ok"
+        android:layout_marginTop="30dp"
+        android:layout_width="200dp"
+        android:layout_height="60dp"
+        android:text="Ok" 
+        android:textSize="35dp"/>
+<TextView android:id="@+id/name" android:layout_width="match_parent" android:layout_height="60dp" android:text="Tax" android:gravity="center" android:textColor="#000000" android:textSize="65dp" android:textStyle="bold" /> 
+   <View android:layout_width="fill_parent" android:layout_height="4dp" android:layout_marginTop="20dp" android:background="#000000" /> 
+
+  <ListView
+      android:id="@+id/list"
+      android:layout_width="fill_parent"
+      android:layout_height="0dip"
+      android:layout_weight="0.52"
+      android:stackFromBottom="false"
+      android:layout_marginTop="20dp"
+      android:transcriptMode="normal" />
+ 
+</LinearLayout>

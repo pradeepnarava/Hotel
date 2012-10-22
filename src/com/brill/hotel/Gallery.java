@@ -250,10 +250,10 @@ public class Gallery extends Activity {
 			}
 	    }
 
-	    public void onBackPressed() {
+	   /* public void onBackPressed() {
 	    	Log.d("back","back");
 	           // Do as you please
 	    	Intent in=new Intent(getApplicationContext(),Menu.class);    
 		     startActivity(in);
-	    }
+	    }*/
 }

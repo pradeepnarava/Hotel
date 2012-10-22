@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+<LinearLayout 
+    android:layout_width="600dp"
+    android:layout_height="wrap_content"
+    android:background="#ffffff"
+    android:orientation="vertical"
+    android:layout_gravity="center" >
+         
+       <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+      
+android:layout_marginTop="30dp" >
+
+           <EditText
+               android:inputType="textNoSuggestions" 
+               android:singleLine="true"
+               android:id="@+id/name"
+               android:layout_width="fill_parent"
+               android:layout_height="60dp"
+              android:textSize="30dp"
+               android:ems="10"
+               android:hint="Name" />
+
+    </LinearLayout>
+
+    <EditText
+        android:inputType="number|textNoSuggestions" 
+        android:singleLine="true"
+        android:id="@+id/price"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:ems="10"
+        android:layout_marginTop="30dp"
+         android:textSize="30dp"
+        android:hint="Price" />
+
+    
+
+    <EditText
+        android:inputType="textMultiLine|textNoSuggestions" 
+        android:singleLine="true"
+        android:id="@+id/description"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+         android:textSize="30dp"
+        android:gravity="top|left"
+        android:ems="10"
+        android:layout_marginTop="30dp"
+        android:hint="Description"
+         >
+
+        <requestFocus />
+    </EditText>
+<LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingTop="20dp" >
+       
+    
+    
+    <Button
+        android:id="@+id/catbutton"
+        android:layout_width="fill_parent"
+        android:layout_height="60dp"
+         android:textSize="30dp"
+        android:text="Category" />
+    </LinearLayout>
+
+<LinearLayout
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:paddingTop="20dp" >
+
+    <ImageView
+        android:id="@+id/loadimage"
+        android:layout_width="180dp"
+        android:layout_height="120dp"
+     
+        android:src="@drawable/ic_launcher" />
+<LinearLayout
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_marginLeft="60dp"
+   >
+    <Button
+        android:id="@+id/imageupload"
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        android:text="Upload Image"
+         android:textSize="30dp" />
+
+    <Button
+        android:id="@+id/capture"
+        android:layout_width="205dp"
+        android:layout_height="60dp"
+        android:text="Camera"
+        android:textSize="30dp" />
+
+    </LinearLayout>
+</LinearLayout>
+
+    <Button
+        android:id="@+id/sub"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginTop="30dp"
+        android:text="Submit"
+         android:textSize="30dp" />
+
+</LinearLayout>
+</ScrollView>

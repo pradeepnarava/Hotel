@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="700dp"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" 
+    android:layout_gravity="center">
+
+    <Button
+        android:id="@+id/Button01"
+        android:layout_width="fill_parent"
+        android:layout_height="60dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:text="From gallery" 
+        android:textSize="25dp">
+    </Button>
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="3dp"
+        android:background="#000000" />
+
+    <GridView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/top_layout_media"
+        android:layout_gravity="center"
+        android:layout_weight="0.57"
+        android:columnWidth="80dp"
+        
+        android:numColumns="2"
+        android:stretchMode="columnWidth" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/Button02"
+            android:layout_width="fill_parent"
+            android:layout_height="60dp"
+            android:layout_weight="0.50"
+            android:orientation="vertical"
+            android:text="SlideShow" 
+            android:textSize="25dp"/>
+    </LinearLayout>
+
+</LinearLayout>

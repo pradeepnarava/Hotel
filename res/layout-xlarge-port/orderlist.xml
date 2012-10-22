@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView  xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/scv">
+<LinearLayout 
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" 
+    android:id="@+id/userorderlist"
+    >
+    
+    <LinearLayout
+	android:layout_width="fill_parent"
+	android:layout_height="100dp"
+     android:orientation="horizontal"
+    >
+    <TextView 
+ 	android:id="@+id/qun" 
+ 	android:layout_width="wrap_content"
+ 	android:text="QUN"
+ 	android:textSize="35dp"
+ 	android:gravity="center"
+ 	android:textColor="#000000"
+ 	android:layout_height="fill_parent" 
+  	android:textStyle="bold"
+  	android:layout_weight="0.20"/> 
+<TextView android:textSize="35dp"
+ 	android:id="@+id/name" 
+ 	android:layout_width="wrap_content"
+ 	android:text="NAME"
+ 	android:gravity="center"
+ 	android:textColor="#000000"
+ 	android:layout_height="fill_parent" 
+  	android:textStyle="bold"
+  	android:layout_weight="0.40"/> 
+<TextView 
+ 	android:id="@+id/price" 
+ 	android:textSize="35dp"
+ 	android:layout_width="wrap_content"
+ 	android:textColor="#000000"
+ 	android:text="PRICE" 
+   android:gravity="center"
+ 	android:layout_height="fill_parent" 
+ 	android:textStyle="bold"
+ 	android:layout_weight="0.40"/> 
+ 	
+ 
+</LinearLayout>
+
+<View 
+	android:layout_width="fill_parent"
+	android:layout_height="6dp"
+	android:background="#000000"/>
+	
+
+    
+<ListView 
+	android:id="@+id/list"
+    android:layout_width="fill_parent" 
+    android:layout_height="700dip"
+    android:layout_weight="1"
+    android:stackFromBottom="false"
+    android:transcriptMode="normal"/>
+
+<LinearLayout
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_weight="0.02"
+    android:orientation="horizontal" >
+      
+       <TextView
+      android:id="@+id/tt"
+      android:layout_width="wrap_content"
+      android:layout_height="80dp"
+      android:text="Tax" 
+      android:textColor="#000000"
+      android:textSize="45dp"
+       android:gravity="center"
+      android:layout_weight="0.50"/>
+      
+    <TextView 
+ 	android:id="@+id/totaltax"
+ 	android:layout_width="wrap_content"
+ 	android:textColor="#000000"
+ 	android:textSize="45dp"
+  android:layout_weight="0.50"
+  android:gravity="center"
+ 	android:layout_height="80dp" 
+ 	android:textStyle="bold"
+ 	/>   
+</LinearLayout>
+<LinearLayout 
+      android:layout_marginTop="30dp"
+    android:layout_width="fill_parent"
+	android:layout_height="wrap_content"
+     android:orientation="horizontal"
+      > 
+      
+       <TextView
+           android:id="@+id/total"
+           android:layout_width="wrap_content"
+           android:layout_height="80dp"
+           android:layout_weight="0.22"
+           android:gravity="center"
+           android:textColor="#000000"
+          
+           android:text="TotalPrice"
+           android:textSize="45dp" />
+      
+    <TextView 
+ 	android:id="@+id/totalprice"
+ 	android:layout_width="wrap_content"
+ 	android:textColor="#000000"
+ 	android:textSize="45dp"
+  android:layout_weight="0.50"
+  android:gravity="center"
+ 	android:layout_height="80dp" 
+ 	android:textStyle="bold"
+ 	/>   
+</LinearLayout>
+<LinearLayout android:layout_width="fill_parent"
+    android:layout_height="wrap_content" 
+    android:orientation="horizontal"
+    android:layout_weight="1"
+    android:layout_marginTop="30dp">
+    <Button android:id="@+id/finalorder"
+ 	android:layout_width="fill_parent"
+ 	android:textColor="#000000"
+ 	android:text="Order Items"
+ 	android:textSize="30dp"
+ 
+  android:gravity="center"
+  android:layout_weight="0.5"
+ 	android:layout_height="80dp" 
+ 	android:textStyle="bold"/>
+    <Button android:id="@+id/list_of_items"
+ 	android:layout_width="fill_parent"
+ 	android:textColor="#000000"
+ 	android:text="List of Items"
+ 	android:textSize="30dp"
+ 
+  android:gravity="center"
+  android:layout_weight="0.5"
+ 	android:layout_height="80dp" 
+ 	android:textStyle="bold"/>
+</LinearLayout>
+
+<Button android:id="@+id/checkOut"
+    android:layout_marginTop="30dp"
+ 	android:layout_width="fill_parent"
+ 	android:textColor="#000000"
+ 	android:text="Order Bill"
+ 	android:textSize="40dp"
+  android:layout_weight="0.50"
+  android:gravity="center"
+ 	android:layout_height="80dp" 
+ 	android:textStyle="bold"/>
+</LinearLayout>
+</ScrollView>

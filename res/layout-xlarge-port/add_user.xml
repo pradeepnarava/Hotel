@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/scrollView1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+             android:orientation="vertical">
+             
+<LinearLayout 
+    android:layout_width="600dp"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+android:layout_gravity="center">
+
+    <TextView
+       android:layout_marginTop="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Create an Account"
+        android:textSize="55dp" 
+        android:layout_gravity="center"/>
+    
+    
+    <LinearLayout  android:layout_marginTop="40dp"
+        android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
+        
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Username"
+            android:textSize="45dp" />
+
+      <EditText android:inputType="text|textNoSuggestions" 
+          android:singleLine="true"
+          android:id="@+id/user_name"
+          android:layout_marginTop="20dp"
+          android:layout_width="match_parent"
+          android:layout_height="60dp" >
+</EditText>"
+    </LinearLayout>
+   <LinearLayout  android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
+        
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Create a password"
+            android:textSize="35dp" />
+
+      <EditText 
+          android:singleLine="true"
+          android:id="@+id/pass"
+          android:layout_marginTop="20dp"
+           android:inputType="textPassword|textNoSuggestions" 
+          android:layout_width="match_parent"
+          android:layout_height="60dp" >
+</EditText>
+    </LinearLayout>
+       <LinearLayout  android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
+        
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Confirm your password"
+            android:textSize="35dp" />
+
+      <EditText
+          android:singleLine="true"
+          android:inputType="textPassword|textNoSuggestions" 
+          android:id="@+id/conf_pass"
+          android:layout_marginTop="20dp"
+          android:layout_width="match_parent"
+          android:layout_height="60dp" >
+</EditText>
+    </LinearLayout>
+ 
+          
+    <RelativeLayout android:layout_marginTop="80dp"
+        android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+       <Button
+           android:id="@+id/cancel"
+           android:layout_width="120dp"
+           android:layout_height="80dp"
+           android:layout_alignParentLeft="true"
+           android:layout_alignParentTop="true"
+           android:layout_marginLeft="140dp"
+           android:text="Cancel"
+           android:textSize="30dp" />
+
+       <Button
+           android:id="@+id/login"
+           android:layout_width="120dp"
+           android:layout_height="80dp"
+           android:layout_alignParentTop="true"
+           android:layout_marginLeft="85dp"
+           android:layout_toRightOf="@+id/cancel"
+           android:text="Save"
+           android:textSize="30dp" />
+        
+    </RelativeLayout>
+</LinearLayout>
+</ScrollView>

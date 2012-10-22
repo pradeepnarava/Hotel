@@ -3,7 +3,6 @@ package com.brill.hotel;
 import java.util.ArrayList;
 import java.util.List;
 
-
 import android.app.Activity;
 import android.app.Dialog;
 import android.app.ProgressDialog;
@@ -16,14 +15,15 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.RatingBar;
+import android.widget.Spinner;
+import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.RatingBar.OnRatingBarChangeListener;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -31,12 +31,14 @@ import android.widget.Toast;
 public class UserMenu extends Activity {
 	 DataBase db;
 	 DataUser data;
+	 DataTable dt;
+	public static String Table_num;
 	 DataAdmin da;
 		Bitmap b;
 		DataLogo dl;
 		 Dialog d;
 		 String Logo;
-		 DataMenuImage dm;
+		// DataMenuImage dm;
 		  RatingBar ratingbar;
           TextView ratings;
           static ArrayList<Object> myArr = new ArrayList<Object>();
@@ -47,7 +49,13 @@ public class UserMenu extends Activity {
 		public static String phone,mobile,email,address;
 		Button menu,contact,gallery,out;
 		String nv="Non_Vag";
+		EditText table_number;
+		public static String position;
 		public ListView lv;
+		int t;
+		 Cursor gettableids;
+		 String dkjfkd;
+		 public static List<String>TableidList= new ArrayList<String>();
 		 public static List<String>contactsList= new ArrayList<String>();
 		 public static List<String>stringList= new ArrayList<String>();
 		 public static List<String>List= new ArrayList<String>();
@@ -58,9 +66,11 @@ public class UserMenu extends Activity {
 		contactsList.clear();
 		db=new DataBase(this);
 		data=new DataUser(this);
-		dm=new DataMenuImage(this);
+		//dm=new DataMenuImage(this);
+		dt=new DataTable(this);
 		da=new DataAdmin(this);
 		dl=new DataLogo(this);
+		TableidList.clear();
 		menu=(Button)findViewById(R.id.menu);
 		contact=(Button)findViewById(R.id.contact);
 		gallery=(Button)findViewById(R.id.gallery);
@@ -71,6 +81,22 @@ public class UserMenu extends Activity {
 		  Cursor getlogo=dl.getlistitems();
 		  
 		  dl.close();
+		  
+		  dt.open();
+		 gettableids=dt.getlistitems();
+		  Log.d("gettableids",""+gettableids);
+		  dt.close();
+		  if(gettableids.moveToFirst())
+		  {
+		   do{
+			 
+			String tableids=gettableids.getString(1);
+		   
+	        System.out.println("name::::::::::"+Logo);
+	       
+	        TableidList.add(tableids);
+		   }while(gettableids.moveToNext());
+		  }
 		  
 		  
 		  if(getlogo.moveToFirst())
@@ -139,18 +165,39 @@ public class UserMenu extends Activity {
 			   }while(getcontacts.moveToNext());
 			   getcontacts.close();
 			}*/
-		
-		
+			table_number=(EditText)findViewById(R.id.table);
+		 dkjfkd=table_number.getText().toString();
+			Log.d("dkjfkd",""+dkjfkd);
+			
+			/*if(t>gettableids.getCount()){
+				 Toast.makeText(UserMenu.this, gettableids.getCount() , Toast.LENGTH_LONG).show();
+	}*/
+			
 		menu.setOnClickListener(new View.OnClickListener() {
 
 				public void onClick(View v) {
-					
-					
-					if( ctg==null){
+					 dkjfkd=table_number.getText().toString();
+						Log.d("dkjfkd",""+dkjfkd);
+				if(dkjfkd.equalsIgnoreCase(""))
+				{
+					Toast.makeText(UserMenu.this,"Please enter table number", Toast.LENGTH_LONG).show();
+				}else{
+					 t=Integer.parseInt(dkjfkd);
+					 Log.d("tablessize",""+t);
+					 int t_n=TableidList.size();
+					 String table_no=Integer.toString(t_n);
+					Log.d("tablelist size",""+TableidList.size());
+					if(t>TableidList.size()){
+						 Toast.makeText(UserMenu.this,"Only"+" "+table_no+" "+"Tables available", Toast.LENGTH_LONG).show();
+					}
+						 else if( ctg==null){
 						 Toast.makeText(UserMenu.this,"Please Create Categories", Toast.LENGTH_LONG).show();
 					 }
 				
 					else{
+						
+						Table_num=TableidList.get(t-1);
+						Log.d("Table_num",""+Table_num);
 					Runnable showWaitDialog = new Runnable() {
 
 						public void run() {
@@ -174,35 +221,13 @@ public class UserMenu extends Activity {
 				 		Thread t = new Thread(showWaitDialog);
 				 		t.start();
 				 		Log.d("start","start");
-					
-						
+				 		
+				 		
 					}
 					
-					/*final CharSequence[] items = stringList.toArray(new CharSequence[ stringList.size()]);;
-					Log.d("items",""+items);
-					AlertDialog.Builder builder = new AlertDialog.Builder(UserMenu.this);
-					builder.setTitle("All Categories");
-					builder.setIcon(R.drawable.ic_launcher);
-					builder.setItems(items, new DialogInterface.OnClickListener() {
-					    public void onClick(DialogInterface dialog, int item) {
-					       
-					    	//Toast.makeText(getApplicationContext(), items[item], Toast.LENGTH_SHORT).show();
-					    	 category.setText(items[item]);
-							    Log.d("select category",""+category);
-					    	//category
-					    	Log.d("items[item]",""+items[item]);
-					    	category=items[item];
-					    	  Log.d("select category",""+category);
-					    	  Cate=category.toString();
-					    	  Intent add_menu = new Intent(UserMenu.this,
-										UsermenuItems.class);
-					    	  startActivity(add_menu);
-					    }
-					});
-					AlertDialog alert = builder.create();
-
-					alert.show();*/
-		          
+					
+				
+				}
 				}
 			});
 		
@@ -358,4 +383,5 @@ public class UserMenu extends Activity {
 	    	 /*Intent in=new Intent(getApplicationContext(),Order.class);    
 		     startActivity(in);*/ 
 	    }
+	 
 }

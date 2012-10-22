@@ -16,7 +16,11 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.json.JSONException;
+import org.json.JSONObject;
 
+
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -35,6 +39,7 @@ import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.StrictMode;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
@@ -49,6 +54,7 @@ import com.brill.hotel.CategoryList.DataAdapter;
 
 
 
+@TargetApi(9)
 public class AddMenu extends Activity{
 	EditText name,price,des,category;
 	String Name,Price,Des,Category;
@@ -57,10 +63,11 @@ public class AddMenu extends Activity{
 	 DataMenuImage data;
 	DataBase db;
 	int imageNum = 0;
+	int itemid;
 	 public static final String PREFS_NAME = "MyApp";
 	 private String selectedImagePath;
 	String saveImage;
-	
+	String TAG_ITEM_ID="id";
 		private Bitmap image;
 		private static final int IMAGE_PICK 	= 1;
 		private static final int IMAGE_CAPTURE 	= 2;
@@ -69,6 +76,7 @@ public class AddMenu extends Activity{
 		 static byte[] byteArray;
 		 public DataAdapter notes;
 		 Button cate;
+		public static String Item_id;
 		 private static final int CAMERA_REQUEST = 1888; 
 		 public static List<String>nameList= new ArrayList<String>();
 		 public static List<String>stringList= new ArrayList<String>();
@@ -78,6 +86,10 @@ public class AddMenu extends Activity{
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.items);
+		
+		 StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+
+			StrictMode.setThreadPolicy(policy); 
 		stringList.clear();
 		db=new DataBase(this);
 		data=new DataMenuImage(this);
@@ -210,12 +222,25 @@ public class AddMenu extends Activity{
 									 Toast.makeText(getApplicationContext(),"Please insert the image", Toast.LENGTH_SHORT).show();
 								 }
 								 else{
+									 UserFunctions userFunction = new UserFunctions();
+								      JSONObject  json = userFunction.ItemsCreate(Name,Price,Category);
+								      Log.d("json",""+json);
+								      try {
+										 Item_id=json.getString(TAG_ITEM_ID);
+										Log.d("Item_id",""+Item_id);
+									 itemid=Integer.parseInt(Item_id);
+										Log.d("itemid",""+itemid);
+									} catch (JSONException e) {
+										// TODO Auto-generated catch block
+										e.printStackTrace();
+									}
 									 data.open();
-							      data.insertval(1,Name,Price,Category,Des,saveImage);
+							      data.insertval(1,Name,Price,Category,Des,saveImage,Item_id);
 							      data.close();
-							    	
+							     
 							    	Intent back=new Intent(AddMenu.this,AddmenuList.class);
 									startActivity(back);
+									finish();
 									
 							    	Toast.makeText(getApplicationContext(),"Data saved", Toast.LENGTH_SHORT).show();
 							    	//

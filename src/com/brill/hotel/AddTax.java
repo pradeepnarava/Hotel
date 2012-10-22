@@ -3,7 +3,10 @@ package com.brill.hotel;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.json.JSONObject;
 
+
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
@@ -12,6 +15,7 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -33,16 +37,23 @@ String Tax,ListTax,row_id;
 ListView contacts;
 TextView et;
  String str;
+ JSONObject json;
+ UserFunctions userfunctions;
 public DataAdapter notes;
 ArrayList<ConstructorTax> DisplayData = new ArrayList<ConstructorTax>();
 public static List<String>taxList= new ArrayList<String>();
 public static List<String>rowList= new ArrayList<String>();
+	@TargetApi(9)
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.add_tax);
+		StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+
+		StrictMode.setThreadPolicy(policy); 
 		DisplayData.clear();
 		data=new DataTax(this);
+	 userfunctions=new UserFunctions();
 		et=(TextView)findViewById(R.id.entertax);
 		tax=(EditText)findViewById(R.id.tax);
 		okay=(Button)findViewById(R.id.ok);
@@ -84,7 +95,9 @@ public static List<String>rowList= new ArrayList<String>();
 			    	rowList.clear();
 			    	contacts.setAdapter(notes);
 			    	TaxsevedData();
-			    	Toast.makeText(getApplicationContext(),"Data saved", Toast.LENGTH_SHORT).show();
+			    	 json=userfunctions.TaxApi(Tax);
+			    	Log.d("json",""+json);
+			    	Toast.makeText(getApplicationContext(),"Tax saved", Toast.LENGTH_SHORT).show();
 			      //System.out.println("ArrayList does not contain 4");
 			    }
 			    else{
@@ -181,7 +194,7 @@ public class DataAdapter extends BaseAdapter{
 					 Log.d("x",""+x);
 			 		d=new Dialog(x);
 			 		d.setContentView(R.layout.modifytax);
-			 		d.setTitle("ENTER MODIFIED DATA");
+			 		d.setTitle("EDIT TAX ");
 			 		d.show();
 			 		final EditText t3=(EditText)d.findViewById(R.id.edit);
 			 		t3.setText(row.Tax());
@@ -203,7 +216,8 @@ public class DataAdapter extends BaseAdapter{
 						DisplayData.remove(i);
 						 DisplayData.add(new ConstructorTax(str));
 						data.close();
-						
+						json=userfunctions.TaxApi(str);
+				    	Log.d("json",""+json);
 						  
 						d.cancel();
 						}
@@ -238,10 +252,10 @@ public class DataAdapter extends BaseAdapter{
 	        return v;
 	        } 
 	    }
- public void onBackPressed() {
+ /*public void onBackPressed() {
  	Log.d("back","back");
         // Do as you please
  	Intent in=new Intent(getApplicationContext(),Menu.class);    
 	     startActivity(in);
- }
+ }*/
 }

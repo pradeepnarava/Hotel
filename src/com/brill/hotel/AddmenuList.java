@@ -10,10 +10,13 @@ import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.json.JSONObject;
+
 import com.brill.hotel.AddMenu.ImagePickListener;
 import com.brill.hotel.AddMenu.TakePictureListener;
 
 
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -32,6 +35,7 @@ import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.StrictMode;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -52,33 +56,40 @@ public class AddmenuList extends Activity  {
 	int imageNum = 0;
 	 public static final String PREFS_NAME = "MyApp";
 	 private String selectedImagePath;
-	String Name,Price,Category,Des,Image;
+	String Name,Price,Category,Des,Image,ItemId;
 	String Ename,Eprice,Ecat,Edes,Eimage;
 	ListView menulist;
 	 Dialog d;
 	 DataBase db;
 	 String saveImage,sevedImage;
+	 UserFunctions userfunctions;
 	 private static final int IMAGE_PICK 	= 1;
 		private static final int IMAGE_CAPTURE 	= 2;
 	 public DataAdapter menu;
+	 String ITEMId;
 	 public static List<String>nameList= new ArrayList<String>();
+	 public static List<String>ItemIdList= new ArrayList<String>();
 	 public static List<String>priceList= new ArrayList<String>();
 	 public static List<String>desList= new ArrayList<String>();
 	 public static List<String>catList= new ArrayList<String>();
 	 public static List<String>imageList= new ArrayList<String>();
 	 public static List<String>stringList= new ArrayList<String>();
-	public static List<String>ImageList= new ArrayList<String>();
+	 public static List<String>ImageList= new ArrayList<String>();
 	 public static List<String>menuList= new ArrayList<String>();
 	 ArrayList<Constructormenu> DisplayData = new ArrayList<Constructormenu>();
 	 ImageView load;
 	 public static int i,p;
 	 public static String ctg;
-	 @Override
+	 @TargetApi(9)
+	@Override
 	 protected void onCreate(Bundle savedInstanceState) {
 	  // TODO Auto-generated method stub
 	
 	  super.onCreate(savedInstanceState);
 	  setContentView(R.layout.menulist);
+	  StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+
+		StrictMode.setThreadPolicy(policy); 
 	  stringList.clear();
 	  
 	 /* Categ=UserMenu.Cate;
@@ -120,7 +131,7 @@ public class AddmenuList extends Activity  {
 	 }
    menulist.setOnItemClickListener(new OnItemClickListener() {
 
-			public void onItemClick(AdapterView<?> parent, View view,
+			public void onItemClick(AdapterView<?> parent, final View view,
 					int position, long id) {
 				
 				
@@ -132,7 +143,7 @@ public class AddmenuList extends Activity  {
 					 Log.d("x",""+x);
 			 		d=new Dialog(x);
 			 		d.setContentView(R.layout.edit_menu);
-			 		d.setTitle("ENTER MODIFIED DATA");
+			 		d.setTitle("EDIT MENU");
 			 		d.show();
 			 	final EditText name=(EditText)d.findViewById(R.id.name);
 			 	name.setText(nameList.get(menulist.getPositionForView(view)));
@@ -143,6 +154,8 @@ public class AddmenuList extends Activity  {
 			 		final Button cate = (Button) d.findViewById(R.id.catbutton);
 			 		cate.setText(catList.get(menulist.getPositionForView(view)));
 			 		load=(ImageView)d.findViewById(R.id.loadimage);
+			 	 ITEMId=ItemIdList.get(menulist.getPositionForView(view));
+			 	 Log.d("ITEMId",""+ITEMId);
 			 		 //Resources res = getResources();
 			 		Image=imageList.get(menulist.getPositionForView(view));
 			         Bitmap bitmap = BitmapFactory.decodeFile(imageList.get(menulist.getPositionForView(view)));
@@ -227,7 +240,11 @@ public class AddmenuList extends Activity  {
 						if(ImageList.size()>0){
 							String EditImage=ImageList.get(0);
 							Log.d("editImage",""+EditImage);
-							data.open();
+							 Log.d("ITEMId",""+ITEMId);
+							userfunctions = new UserFunctions();
+						      JSONObject  json = userfunctions.UpPriceURL(Eprice, ITEMId);
+							Log.d("json",""+json);
+						      data.open();
 							data.updateTitle(i, Ename,Eprice, Ecat,Edes,EditImage);
 							Log.d("i",""+i);
 							data.close();
@@ -245,6 +262,10 @@ public class AddmenuList extends Activity  {
 							
 							Log.d("Image",""+Image);
 							 Log.d("saveImage",""+saveImage);
+							 userfunctions = new UserFunctions();
+							 Log.d("ITEMId",""+ITEMId);
+						      JSONObject  json = userfunctions.UpPriceURL(Eprice, ITEMId);
+							Log.d("json",""+json);
 							data.open();
 							data.updateTitle(i, Ename,Eprice, Ecat,Edes,Image);
 							Log.d("i",""+i);
@@ -297,6 +318,7 @@ public class AddmenuList extends Activity  {
 	  Des=getdetails.getString(3);
 	  Image=getdetails.getString(4);
 	  Log.d("Image",""+Image);
+	  ItemId=getdetails.getString(5);
 	 /* byte[] bb = getdetails.getBlob(getdetails.getColumnIndex("image"));
 	  ByteArrayInputStream inputStream = new ByteArrayInputStream(bb);
 	    Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
@@ -311,6 +333,8 @@ public class AddmenuList extends Activity  {
      Log.d("catList",""+catList.size());
      imageList.add(Image);
      Log.d("imageList",""+imageList.size());
+     ItemIdList.add(ItemId);
+     Log.d("ItemIdList",""+ItemIdList.size());
 	  Log.d("selected Name",""+Name);
 	  Log.d("selected price",""+Price);
 	  Log.d("selected Category",""+Category);

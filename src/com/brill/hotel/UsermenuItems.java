@@ -1,6 +1,5 @@
 package com.brill.hotel;
 
-import java.io.ByteArrayInputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -32,7 +31,7 @@ import android.widget.Toast;
 
 public class UsermenuItems extends Activity  {
 	DataMenuImage data;
-	String Name,Price,Category,Des,Categ,RowId,Image;
+	String Name,Price,Category,Des,Categ,RowId,Image,Item_Id;
 	ListView menulist;
 	DataLogo dl;
 	 public DataAdapter menu;
@@ -40,6 +39,7 @@ public class UsermenuItems extends Activity  {
 		private Dialog dialog;
 		HashMap<String, String>hashList = new HashMap<String, String>();
 	 static ArrayList<Object> myArr = new ArrayList<Object>();
+	 public static List<String>Item_IdList= new ArrayList<String>();
 	 public static List<String>menuList= new ArrayList<String>();
 	 public static List<String>desList= new ArrayList<String>();
 	 public static List<String>RowList= new ArrayList<String>();
@@ -81,7 +81,8 @@ public class UsermenuItems extends Activity  {
 	 Category=getdetails.getString(3);
 	  Des=getdetails.getString(4);
 	 Image=getdetails.getString(5);
-	 
+	// Item_Id=getdetails.getString(6);
+	 //Log.d("Item_Id",""+Item_Id);
 	
 	  Log.d("selected RowId",""+RowId);
 	  Log.d("selected Name",""+Name);
@@ -93,7 +94,7 @@ public class UsermenuItems extends Activity  {
         System.out.println("name::::::::::"+Name);
        menuList.add(Name+":"+Price);
          Log.d("menulist",""+menuList);
-         CategoryList.add(Category);
+         CategoryList.add(UserCategory.namcat);
          Log.d(" CategoryList",""+ CategoryList);
          desList.add(Des);
          Log.d("desList",""+desList);
@@ -101,6 +102,8 @@ public class UsermenuItems extends Activity  {
          Log.d(" RowList",""+ RowList);
          ImageList.add(Image);
          Log.d(" ImageList",""+ ImageList);
+        /* Item_IdList.add(Item_Id);
+         Log.d("Item_IdList",""+Item_IdList);*/
         DisplayData.add(new Constructorusermenu(Name));
 		   /*}
 		   else{
@@ -178,7 +181,15 @@ public class UsermenuItems extends Activity  {
         View view = findViewById(R.id.usercatlist);
         view.setBackgroundDrawable(bd);
 	}
-	  
+	  Button list_of_items=(Button)findViewById(R.id.list_items);
+	  list_of_items.setOnClickListener(new View.OnClickListener() {
+		
+		public void onClick(View v) {
+			// TODO Auto-generated method stub
+			Intent in=new Intent(getApplicationContext(),OrderList.class);
+			startActivity(in);
+		}
+	});
 	 }
 	 public boolean onCreateOptionsMenu(Menu menu) {
 	    	MenuInflater inflater = getMenuInflater();
@@ -191,12 +202,14 @@ public class UsermenuItems extends Activity  {
 	    	case R.id.next:
 	    		Intent menu=new Intent(getApplicationContext(),UserMenu.class);    
 			     startActivity(menu);
+			     finish();
 	    		/*Toast.makeText(this, "You have chosen the " + getResources().getString(R.string.next) + " menu option",
 	            		Toast.LENGTH_SHORT).show();*/
 	    		return true;
 	    	case R.id.previous:
 	    		Intent in=new Intent(getApplicationContext(),UserCategory.class);    
 			     startActivity(in);
+			     finish();
 	    		/*Toast.makeText(this, "You have chosen the " + getResources().getString(R.string.previous) + " menu option",
 	            		Toast.LENGTH_SHORT).show();*/
 	    		return true;

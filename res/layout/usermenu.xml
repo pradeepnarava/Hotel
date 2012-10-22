@@ -4,6 +4,16 @@
     android:layout_height="match_parent"
     android:orientation="vertical" 
     android:id="@+id/usermenu">
+
+    <EditText
+        android:id="@+id/table"
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp" 
+        android:inputType="number|textNoSuggestions"
+        android:hint="Table Number"/>
+
     <Button
         android:layout_marginTop="20dp"
         android:id="@+id/menu"
@@ -24,6 +34,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="Gallery" />
+    
 <Button
         android:layout_marginTop="20dp"
         android:id="@+id/logout"
@@ -33,7 +44,7 @@
     
 
     <RatingBar
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:id="@+id/feedback"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />

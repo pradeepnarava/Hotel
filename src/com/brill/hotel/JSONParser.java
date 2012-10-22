@@ -45,6 +45,9 @@ public JSONObject getJSONFromUrl(String url, List<NameValuePair> params) {
 		HttpResponse httpResponse = httpClient.execute(request);
 		HttpEntity httpEntity = httpResponse.getEntity();
 		is = httpEntity.getContent();
+		/*HttpResponse httpResponse = httpClient.execute(request);
+		HttpEntity httpEntity = httpResponse.getEntity();
+		is = httpEntity.getContent();	*/
 
 	} catch (UnsupportedEncodingException e) {
 		e.printStackTrace();

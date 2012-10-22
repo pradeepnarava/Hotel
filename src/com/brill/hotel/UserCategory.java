@@ -132,6 +132,16 @@ public class UserCategory extends Activity  {
         View view = findViewById(R.id.usercat);
         view.setBackgroundDrawable(bd);
 	 }
+	 Button list_of_items=(Button)findViewById(R.id.list_of_items);
+	 list_of_items.setOnClickListener(new View.OnClickListener() {
+		
+		public void onClick(View v) {
+			// TODO Auto-generated method stub
+			Intent in=new Intent(getApplicationContext(),OrderList.class);
+			startActivity(in);
+			
+		}
+	});
 	 }
 	 
 	 public class DataAdapter extends BaseAdapter{
@@ -198,12 +208,12 @@ public class UserCategory extends Activity  {
 				 		t.start();
 				 		Log.d("start","start");
 				 		 dm.open();
-				 		  Cursor getitems=dm.getlistcat(cat);
-				 		  Log.d("category",""+cat);
+				 		  Cursor getitems=dm.getlistcat(namcat);
+				 		  Log.d("category",""+ namcat);
 				 		  //categoryList.add(cat);
 				 		  dm.close();
 				 		if(getitems.getCount()==0){
-				 			Toast.makeText(UserCategory.this,cat+"  "+"Items are not avilable", Toast.LENGTH_LONG).show();
+				 			Toast.makeText(UserCategory.this,namcat+"  "+"Items are not avilable", Toast.LENGTH_LONG).show();
 				 		}
 				 		else{
 				 		Intent in=new Intent(getApplicationContext(),UsermenuItems.class);    
@@ -263,12 +273,14 @@ public class UserCategory extends Activity  {
 	    	case R.id.next:
 	    		Intent gal=new Intent(getApplicationContext(),Showimages.class);    
 			     startActivity(gal);
+			     finish();
 	    		/*Toast.makeText(this, "You have chosen the " + getResources().getString(R.string.next) + " menu option",
 	            		Toast.LENGTH_SHORT).show();*/
 	    		return true;
 	    	case R.id.previous:
 	    		Intent in=new Intent(getApplicationContext(),Contacts.class);    
 			     startActivity(in);
+			     finish();
 	    		/*Toast.makeText(this, "You have chosen the " + getResources().getString(R.string.previous) + " menu option",
 	            		Toast.LENGTH_SHORT).show();*/
 	    		return true;

@@ -3,8 +3,6 @@ package com.brill.hotel;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -13,21 +11,26 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 public class AddUser extends Activity {
-	EditText name,pass,conf_pass,roll;
+	EditText name,pass,conf_pass,roll;//table_no;
 	Button log,canc;
 	 String Name,Pass,Conf;
+	public static String table_number;
 	 DataLogin data;
 	 DataAdmin db;
+	
 		String Roll="user";
+		
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.add_user);
 		data=new DataLogin(this);
 		db=new DataAdmin(this);
+		
 		Log.d("",""+Roll);
 		name=(EditText)findViewById(R.id.user_name);
 		pass=(EditText)findViewById(R.id.pass);
 		conf_pass=(EditText)findViewById(R.id.conf_pass);
+		//table_no=(EditText)findViewById(R.id.table_num);
 		log=(Button)findViewById(R.id.login);
 		canc=(Button)findViewById(R.id.cancel);
 		log.setOnClickListener(new View.OnClickListener() {
@@ -38,6 +41,8 @@ public class AddUser extends Activity {
 				Pass=pass.getText().toString();	
 				
 				Conf=conf_pass.getText().toString();
+				//table_number=table_no.getText().toString();
+				Log.d("table_number",""+table_number);
 				Log.d("",""+Roll);
 				if(name.getText().toString().matches("[a-zA-Z]")){
 					
@@ -68,13 +73,21 @@ public class AddUser extends Activity {
 						//pass.setError("please enter password");
 						Toast.makeText(getApplicationContext(),"please enter password",Toast.LENGTH_SHORT).show();
 					}
+                      /*else if(table_no.getText().toString().equalsIgnoreCase("")){
+						
+						//pass.setError("please enter password");
+						Toast.makeText(getApplicationContext(),"please enter Table number",Toast.LENGTH_SHORT).show();
+					}*/
 					else{
 					Log.d("",""+Roll);
 			
 				data.open();
 				data.insertval(1,Name,Pass,Roll);
-			//data.insertvaluser(1, Name, Pass, Roll, b);
+			//data.insertvaluser(1, Name, Pass, Roll,table_number);
 				data.close();
+				
+				
+				
 				Intent menu = new Intent(AddUser.this,
 						Menu.class);
 				startActivity(menu);

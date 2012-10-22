@@ -4,23 +4,44 @@ package com.brill.hotel;
 
 
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import android.annotation.TargetApi;
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 
 
 
 
 public class Menu extends Activity{
+	public static String TableId; 
+	DataTable dt;
+	JSONArray tablearray;
+	public static List<String>TableIDList= new ArrayList<String>();
+	@TargetApi(9)
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.menu);
 		
-		
+		 StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+
+			StrictMode.setThreadPolicy(policy); 
+			dt=new DataTable(this);
+		final Dialog dialog = new Dialog(this);
+		final UserFunctions userfunctions=new UserFunctions();
 		Button signin = (Button) findViewById(R.id.add_menu);
 		signin.setOnClickListener(new View.OnClickListener() {
 
@@ -110,6 +131,51 @@ public class Menu extends Activity{
 				Intent addgal = new Intent(Menu.this,
 						Gallery.class);
 				startActivity(addgal);
+
+			}
+		});
+		Button table_no = (Button) findViewById(R.id.tableno);
+		table_no.setOnClickListener(new View.OnClickListener() {
+
+			public void onClick(View v) {
+
+				
+
+				 dialog.setContentView(R.layout.table);
+				 dialog.setTitle("Table Number");
+				 dialog.show();
+				 final EditText table_no=(EditText)dialog.findViewById(R.id.table_num);
+				 Button enter=(Button)dialog.findViewById(R.id.enter_table);
+				 enter.setOnClickListener(new View.OnClickListener() {
+					
+					public void onClick(View v) {
+						// TODO Auto-generated method stub
+						String Table_num=table_no.getText().toString();
+						Log.d("Table_num",""+Table_num);
+						int tn=Integer.parseInt(Table_num);
+						Log.d("tn",""+tn);
+						 JSONObject  json = userfunctions.Tablenumber(Table_num);
+					      Log.d("json",""+json);
+					     try {
+							tablearray=json.getJSONArray("id");
+							Log.d("tableid",""+tablearray);
+							for(int i = 0; i < tablearray.length(); i++){
+								TableId=tablearray.getString(i);
+								dt.open();
+								
+								dt.insertval(1,TableId);
+								dt.close();
+								TableIDList.add(TableId);
+								//Log.d("TableList",""+ TableIDList.get(1));
+							}
+							
+						} catch (JSONException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					      dialog.cancel();
+					}
+				});
 
 			}
 		});

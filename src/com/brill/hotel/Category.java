@@ -211,7 +211,7 @@ public class DataAdapter extends BaseAdapter{
 					 Log.d("x",""+x);
 			 		d=new Dialog(x);
 			 		d.setContentView(R.layout.modifiedcat);
-			 		d.setTitle("ENTER MODIFIED DATA");
+			 		d.setTitle("EDIT CATEGORIES");
 			 		d.show();
 			 		final EditText t3=(EditText)d.findViewById(R.id.edit);
 			 		t3.setText(row.Cat());

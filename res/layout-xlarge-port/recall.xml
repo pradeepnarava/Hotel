@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        
+        android:orientation="vertical">
+
+         <LinearLayout
+             android:layout_width="fill_parent"
+             android:layout_height="wrap_content"
+             android:orientation="horizontal" >
+
+        <!-- Cost Label -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#5d5d5d"
+            android:gravity="left"
+            android:textStyle="bold"
+            android:text="Item_name: " 
+            android:textSize="40dp">
+        </TextView>
+		<!-- Name Label -->
+        <TextView
+            android:id="@+id/up_name"
+             android:textSize="40dp"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#43bd00"
+           
+            android:textStyle="bold"
+            android:paddingTop="6dip"
+            android:paddingBottom="2dip" />
+        </LinearLayout>
+		<!-- Description label -->
+
+		 <LinearLayout
+		     android:layout_marginTop="10dp"
+		     android:layout_width="fill_parent"
+		     android:layout_height="wrap_content"
+		     android:orientation="horizontal" >
+
+        <!-- Cost Label -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#5d5d5d"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:text="Quantity: " 
+             android:textSize="40dp">
+        </TextView>
+        <TextView
+            android:id="@+id/up_qun"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#acacac"
+            android:paddingBottom="2dip"
+             android:textSize="40dp">
+        </TextView>
+        </LinearLayout>
+        <!-- Linear layout for cost and price Cost: Rs.100 -->
+        <LinearLayout  android:layout_marginTop="10dp"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <!-- Cost Label -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#5d5d5d"
+            android:gravity="left"
+            android:textStyle="bold"
+            android:text="Price: " 
+             android:textSize="40dp">
+        </TextView>
+        <!-- Price Label -->
+        <TextView
+            android:id="@+id/up_price"
+            android:layout_width="480dp"
+            android:layout_height="wrap_content"
+            android:textColor="#acacac" 
+            android:textStyle="bold"
+            android:gravity="left"
+             android:textSize="40dp">
+        </TextView>
+
+        <Button
+            android:id="@+id/up_cancel"
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+              android:text="Cancel"
+ android:textSize="40dp"/>
+
+      
+       
+        </LinearLayout>
+    </LinearLayout>

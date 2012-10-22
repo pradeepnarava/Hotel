@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="700dp"
+    android:layout_gravity="center"
+    android:layout_height="fill_parent">
+<LinearLayout 
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="#ffffff"
+    android:orientation="vertical" >
+         
+       <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingTop="20dp" >
+
+           <EditText
+               android:inputType="textNoSuggestions" 
+               android:singleLine="true"
+               android:id="@+id/name"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_weight="1"
+               android:ems="10"
+               android:hint="Name" />
+
+    </LinearLayout>
+
+    <EditText
+        android:inputType="number|textNoSuggestions" 
+        android:singleLine="true"
+        android:id="@+id/price"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Price" />
+
+    
+
+    <EditText
+        android:inputType="textMultiLine|textNoSuggestions" 
+        android:singleLine="true"
+        android:id="@+id/description"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+  
+        android:gravity="top|left"
+        android:ems="10"
+        android:hint="Description"
+         >
+
+        <requestFocus />
+    </EditText>
+<LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingTop="20dp" >
+       
+    
+    
+    <Button
+        android:id="@+id/catbutton"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Category" />
+    </LinearLayout>
+
+<LinearLayout
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:paddingTop="20dp" >
+
+    <ImageView
+        android:id="@+id/loadimage"
+        android:layout_width="100dp"
+        android:layout_height="74dp"
+     
+        android:src="@drawable/ic_launcher" />
+<LinearLayout
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+   >
+    <Button
+        android:id="@+id/imageupload"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Upload Image" />
+
+    <Button
+        android:id="@+id/capture"
+        android:layout_width="108dp"
+        android:layout_height="wrap_content"
+        android:text="Camera" />
+
+    </LinearLayout>
+</LinearLayout>
+
+    <Button
+        android:id="@+id/sub"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Submit" />
+
+</LinearLayout>
+</ScrollView>
